@@ -321,23 +321,140 @@
       flex-wrap: wrap;
       gap: 6px;
     }
-    .btn-card-action {
-      display: inline-flex;
+    /* Мобильный экран блокировки ПИН-кодом */
+    #pin-overlay {
+      position: fixed;
+      top: 0; left: 0; width: 100%; height: 100%;
+      background: #0f172a;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
       align-items: center;
-      gap: 5px;
-      background: #ffffff;
-      border: 1px solid #cbd5e1;
-      color: var(--primary-light);
-      padding: 5px 10px;
-      border-radius: 6px;
-      font-size: 11.5px;
+      z-index: 99999;
+      padding: 24px;
+    }
+    .pin-box {
+      background: #1e293b;
+      border: 1px solid #334155;
+      border-radius: 20px;
+      padding: 28px 24px;
+      width: 100%;
+      max-width: 320px;
+      text-align: center;
+      box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.5);
+    }
+    .pin-logo {
+      font-size: 26px;
+      margin-bottom: 8px;
+    }
+    .pin-title {
+      color: #ffffff;
+      font-size: 18px;
+      font-weight: 800;
+      margin-bottom: 4px;
+    }
+    .pin-subtitle {
+      color: #94a3b8;
+      font-size: 13px;
+      margin-bottom: 20px;
+    }
+    .pin-dots {
+      display: flex;
+      justify-content: center;
+      gap: 14px;
+      margin-bottom: 24px;
+    }
+    .pin-dot {
+      width: 16px;
+      height: 16px;
+      border-radius: 50%;
+      border: 2px solid #64748b;
+      background: transparent;
+      transition: all 0.2s ease;
+    }
+    .pin-dot.filled {
+      background: #38bdf8;
+      border-color: #38bdf8;
+      box-shadow: 0 0 10px rgba(56, 189, 248, 0.6);
+    }
+    .pin-numpad {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+    }
+    .pin-btn {
+      background: #334155;
+      color: #ffffff;
+      border: none;
+      border-radius: 14px;
+      font-size: 22px;
+      font-weight: 700;
+      padding: 14px 0;
+      cursor: pointer;
+      user-select: none;
+      transition: background 0.15s ease, transform 0.1s ease;
+    }
+    .pin-btn:active {
+      background: #475569;
+      transform: scale(0.96);
+    }
+    .pin-btn.fn {
+      background: transparent;
+      color: #94a3b8;
+      font-size: 15px;
       font-weight: 600;
-      text-decoration: none;
+    }
+    .pin-error-text {
+      color: #f87171;
+      font-size: 13px;
+      font-weight: 600;
+      margin-top: 14px;
+      min-height: 18px;
+    }
+    .shake {
+      animation: shake 0.4s ease-in-out;
+    }
+    @keyframes shake {
+      0%, 100% { transform: translateX(0); }
+      20%, 60% { transform: translateX(-8px); }
+      40%, 80% { transform: translateX(8px); }
     }
   </style>
-</head>
 <body>
-  <div class="container">
+  <!-- Экран ввода PIN-кода для защиты данных -->
+  <div id="pin-overlay">
+    <div class="pin-box" id="pinBox">
+      <div class="pin-logo">🔒</div>
+      <div class="pin-title">СК «Сириус»</div>
+      <div class="pin-subtitle">Введите PIN-код доступа</div>
+      
+      <div class="pin-dots">
+        <div class="pin-dot" id="dot0"></div>
+        <div class="pin-dot" id="dot1"></div>
+        <div class="pin-dot" id="dot2"></div>
+        <div class="pin-dot" id="dot3"></div>
+      </div>
+
+      <div class="pin-numpad">
+        <button type="button" class="pin-btn" onclick="pressKey('1')">1</button>
+        <button type="button" class="pin-btn" onclick="pressKey('2')">2</button>
+        <button type="button" class="pin-btn" onclick="pressKey('3')">3</button>
+        <button type="button" class="pin-btn" onclick="pressKey('4')">4</button>
+        <button type="button" class="pin-btn" onclick="pressKey('5')">5</button>
+        <button type="button" class="pin-btn" onclick="pressKey('6')">6</button>
+        <button type="button" class="pin-btn" onclick="pressKey('7')">7</button>
+        <button type="button" class="pin-btn" onclick="pressKey('8')">8</button>
+        <button type="button" class="pin-btn" onclick="pressKey('9')">9</button>
+        <button type="button" class="pin-btn fn" onclick="clearPin()">Сброс</button>
+        <button type="button" class="pin-btn" onclick="pressKey('0')">0</button>
+        <button type="button" class="pin-btn fn" onclick="backspacePin()">⌫</button>
+      </div>
+
+      <div class="pin-error-text" id="pinError"></div>
+    </div>
+  </div>
+
+  <div class="container" id="mainContent" style="display: none;">
     <!-- Лаконичная шапка -->
     <header>
       <div class="header-top">
@@ -1155,6 +1272,85 @@
   </div>
 
   <script>
+    const CORRECT_PIN = "1235";
+    let enteredPin = "";
+
+    // Проверка сохраненной сессии (чтобы не вводить каждый раз при обновлении страницы в течение дня)
+    if (sessionStorage.getItem("sirius_auth") === "true") {
+      unlockPage();
+    }
+
+    function updateDots() {
+      for (let i = 0; i < 4; i++) {
+        const dot = document.getElementById("dot" + i);
+        if (i < enteredPin.length) {
+          dot.classList.add("filled");
+        } else {
+          dot.classList.remove("filled");
+        }
+      }
+    }
+
+    function pressKey(num) {
+      if (enteredPin.length < 4) {
+        enteredPin += num;
+        updateDots();
+        document.getElementById("pinError").innerText = "";
+
+        if (enteredPin.length === 4) {
+          setTimeout(verifyPin, 100);
+        }
+      }
+    }
+
+    function clearPin() {
+      enteredPin = "";
+      updateDots();
+      document.getElementById("pinError").innerText = "";
+    }
+
+    function backspacePin() {
+      if (enteredPin.length > 0) {
+        enteredPin = enteredPin.slice(0, -1);
+        updateDots();
+        document.getElementById("pinError").innerText = "";
+      }
+    }
+
+    function verifyPin() {
+      if (enteredPin === CORRECT_PIN) {
+        sessionStorage.setItem("sirius_auth", "true");
+        unlockPage();
+      } else {
+        const box = document.getElementById("pinBox");
+        const err = document.getElementById("pinError");
+        err.innerText = "Неверный PIN-код!";
+        box.classList.add("shake");
+        setTimeout(() => {
+          box.classList.remove("shake");
+          clearPin();
+        }, 500);
+      }
+    }
+
+    function unlockPage() {
+      document.getElementById("pin-overlay").style.display = "none";
+      document.getElementById("mainContent").style.display = "block";
+    }
+
+    // Поддержка ввода с клавиатуры ПК
+    window.addEventListener("keydown", function(e) {
+      if (document.getElementById("pin-overlay").style.display !== "none") {
+        if (e.key >= "0" && e.key <= "9") {
+          pressKey(e.key);
+        } else if (e.key === "Backspace") {
+          backspacePin();
+        } else if (e.key === "Escape") {
+          clearPin();
+        }
+      }
+    });
+
     function toggleAllCards() {
       const cards = document.querySelectorAll('.smr-card');
       const anyOpen = Array.from(cards).some(c => c.open);
