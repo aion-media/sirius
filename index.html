@@ -12,11 +12,11 @@
       --success: #15803d;
       --warning: #b45309;
       --danger: #b91c1c;
-      --bg: #e0f2fe; /* Чистый благородный голубой (Sky Blue) */
+      --bg: #e0f2fe;
       --card-bg: #ffffff;
       --text-main: #0f172a;
       --text-muted: #64748b;
-      --border: #bfdbfe; /* Мягкая голубоватая граница */
+      --border: #bfdbfe;
       --radius: 14px;
       --shadow-sm: 0 4px 6px -1px rgba(15, 23, 42, 0.08), 0 2px 4px -2px rgba(15, 23, 42, 0.05);
       --shadow-md: 0 10px 20px -3px rgba(15, 23, 42, 0.12), 0 4px 8px -4px rgba(15, 23, 42, 0.08);
@@ -33,7 +33,6 @@
     }
     .container { max-width: 860px; margin: 0 auto; }
 
-    /* Шапка документа - насыщенный темно-синий градиент */
     header {
       background: linear-gradient(135deg, #0f172a 0%, #1e3a8a 50%, #0369a1 100%);
       border: 1px solid rgba(255, 255, 255, 0.15);
@@ -63,7 +62,6 @@
     header h1 { font-size: 19px; font-weight: 800; line-height: 1.25; margin-bottom: 2px; }
     header p { color: #bfdbfe; font-size: 12.5px; line-height: 1.35; }
 
-    /* Панель управления лентой */
     .toolbar {
       display: flex;
       justify-content: space-between;
@@ -74,7 +72,7 @@
     .toolbar-title {
       font-size: 12px;
       font-weight: 700;
-      color: #1e3a8a; /* Глубокий синий на голубом фоне */
+      color: #1e3a8a;
       text-transform: uppercase;
       letter-spacing: 0.5px;
     }
@@ -90,7 +88,6 @@
       box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
     }
 
-    /* Лента карточек (Mobile-First 2 уровня) */
     .cards-list {
       display: flex;
       flex-direction: column;
@@ -111,9 +108,6 @@
       border-color: #cbd5e1;
     }
 
-    /* ========================================================= */
-    /* 1-Й УРОВЕНЬ: ВИДЕН ВСЕГДА В ЛЕНТЕ (ИДЕНТИФИКАЦИЯ + ФИНАНСЫ) */
-    /* ========================================================= */
     .card-summary {
       padding: 14px 14px 12px;
       cursor: pointer;
@@ -159,7 +153,6 @@
       margin-top: 3px;
     }
 
-    /* Финансовая сетка: К оплате / Оплачено / Остаток */
     .finance-grid {
       display: grid;
       grid-template-columns: 1.1fr 1fr 1.1fr;
@@ -178,7 +171,6 @@
     .fin-amount.remain { color: var(--danger); }
     .fin-amount.zero { color: #64748b; }
 
-    /* Прогресс-бар оплаты */
     .pay-progress-bar {
       height: 4px;
       background: #e2e8f0;
@@ -216,9 +208,6 @@
       font-size: 9px;
     }
 
-    /* ========================================================= */
-    /* 2-Й УРОВЕНЬ: РАСКРЫВАЮЩИЙСЯ БЛОК (ДЕТАЛИЗАЦИЯ)            */
-    /* ========================================================= */
     .card-body {
       background: #ffffff;
       border-top: 1px dashed var(--border);
@@ -251,40 +240,6 @@
     }
     .detail-text strong { color: var(--text-main); }
 
-    /* БЛОК СТРОК ИЗ СЧЁТА ЗАКАЗЧИКА */
-    .invoice-lines-block {
-      background: #fffbeb;
-      border: 1px solid #fef3c7;
-      border-left: 3px solid #f59e0b;
-      border-radius: 8px;
-      padding: 9px 11px;
-      margin-bottom: 10px;
-    }
-    .invoice-lines-title {
-      font-size: 11px;
-      font-weight: 700;
-      color: #92400e;
-      text-transform: uppercase;
-      margin-bottom: 6px;
-      display: flex;
-      align-items: center;
-      gap: 5px;
-    }
-    .invoice-line-item {
-      display: flex;
-      justify-content: space-between;
-      align-items: baseline;
-      gap: 8px;
-      padding: 4px 0;
-      border-bottom: 1px dashed #fde68a;
-      font-size: 12px;
-    }
-    .invoice-line-item:last-child { border-bottom: none; }
-    .inv-name { color: #334155; flex: 1; line-height: 1.35; }
-    .inv-name span { color: #64748b; font-size: 11px; }
-    .inv-cost { font-weight: 700; color: #1e3a8a; white-space: nowrap; text-align: right; }
-
-    /* Себестоимость */
     .cost-box-simple {
       background: #ffffff;
       border: 1px solid var(--border);
@@ -298,7 +253,6 @@
     .cost-box-lbl { font-size: 11px; color: var(--text-muted); font-weight: 600; text-transform: uppercase; }
     .cost-box-val { font-size: 13.5px; font-weight: 800; color: var(--text-main); }
 
-    /* Статус внизу раскрытого списка */
     .status-bottom-bar {
       display: flex;
       justify-content: space-between;
@@ -320,13 +274,6 @@
     .status-val-pill.kp { background: #fef3c7; color: #92400e; }
     .status-val-pill.prod { background: #dbeafe; color: #1e40af; }
 
-    /* Кнопки файлов */
-    .action-links {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 6px;
-    }
-    /* Мобильный экран блокировки ПИН-кодом */
     #pin-overlay {
       position: fixed;
       top: 0; left: 0; width: 100%; height: 100%;
@@ -348,98 +295,44 @@
       text-align: center;
       box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.5);
     }
-    .pin-logo {
-      font-size: 26px;
-      margin-bottom: 8px;
-    }
-    .pin-title {
-      color: #ffffff;
-      font-size: 18px;
-      font-weight: 800;
-      margin-bottom: 4px;
-    }
-    .pin-subtitle {
-      color: #94a3b8;
-      font-size: 13px;
-      margin-bottom: 20px;
-    }
-    .pin-dots {
-      display: flex;
-      justify-content: center;
-      gap: 14px;
-      margin-bottom: 24px;
-    }
+    .pin-logo { font-size: 26px; margin-bottom: 8px; }
+    .pin-title { color: #ffffff; font-size: 18px; font-weight: 800; margin-bottom: 4px; }
+    .pin-subtitle { color: #94a3b8; font-size: 13px; margin-bottom: 20px; }
+    .pin-dots { display: flex; justify-content: center; gap: 14px; margin-bottom: 24px; }
     .pin-dot {
-      width: 16px;
-      height: 16px;
-      border-radius: 50%;
-      border: 2px solid #64748b;
-      background: transparent;
-      transition: all 0.2s ease;
+      width: 16px; height: 16px; border-radius: 50%;
+      border: 2px solid #64748b; background: transparent; transition: all 0.2s ease;
     }
-    .pin-dot.filled {
-      background: #38bdf8;
-      border-color: #38bdf8;
-      box-shadow: 0 0 10px rgba(56, 189, 248, 0.6);
-    }
-    .pin-numpad {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 12px;
-    }
+    .pin-dot.filled { background: #38bdf8; border-color: #38bdf8; box-shadow: 0 0 10px rgba(56, 189, 248, 0.6); }
+    .pin-numpad { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
     .pin-btn {
-      background: #334155;
-      color: #ffffff;
-      border: none;
-      border-radius: 14px;
-      font-size: 22px;
-      font-weight: 700;
-      padding: 14px 0;
-      cursor: pointer;
-      user-select: none;
-      transition: background 0.15s ease, transform 0.1s ease;
+      background: #334155; color: #ffffff; border: none; border-radius: 14px;
+      font-size: 22px; font-weight: 700; padding: 14px 0; cursor: pointer;
+      user-select: none; transition: background 0.15s ease, transform 0.1s ease;
     }
-    .pin-btn:active {
-      background: #475569;
-      transform: scale(0.96);
-    }
-    .pin-btn.fn {
-      background: transparent;
-      color: #94a3b8;
-      font-size: 15px;
-      font-weight: 600;
-    }
-    .pin-error-text {
-      color: #f87171;
-      font-size: 13px;
-      font-weight: 600;
-      margin-top: 14px;
-      min-height: 18px;
-    }
-    .shake {
-      animation: shake 0.4s ease-in-out;
-    }
+    .pin-btn:active { background: #475569; transform: scale(0.96); }
+    .pin-btn.fn { background: transparent; color: #94a3b8; font-size: 15px; font-weight: 600; }
+    .pin-error-text { color: #f87171; font-size: 13px; font-weight: 600; margin-top: 14px; min-height: 18px; }
+    .shake { animation: shake 0.4s ease-in-out; }
     @keyframes shake {
       0%, 100% { transform: translateX(0); }
       20%, 60% { transform: translateX(-8px); }
       40%, 80% { transform: translateX(8px); }
     }
   </style>
+</head>
 <body>
-  <!-- Экран ввода PIN-кода для защиты данных -->
   <div id="pin-overlay">
     <div class="pin-box" id="pinBox">
       <div class="pin-logo">🔒</div>
       <div class="pin-title">СК «Сириус»</div>
       <div class="pin-subtitle">Введите PIN-код доступа</div>
-      
       <div class="pin-dots">
         <div class="pin-dot" id="dot0"></div>
         <div class="pin-dot" id="dot1"></div>
         <div class="pin-dot" id="dot2"></div>
         <div class="pin-dot" id="dot3"></div>
       </div>
-
       <div class="pin-numpad">
         <button type="button" class="pin-btn" onclick="pressKey('1')">1</button>
         <button type="button" class="pin-btn" onclick="pressKey('2')">2</button>
@@ -454,13 +347,11 @@
         <button type="button" class="pin-btn" onclick="pressKey('0')">0</button>
         <button type="button" class="pin-btn fn" onclick="backspacePin()">⌫</button>
       </div>
-
       <div class="pin-error-text" id="pinError"></div>
     </div>
   </div>
 
   <div class="container" id="mainContent" style="display: none;">
-    <!-- Лаконичная шапка -->
     <header>
       <div class="header-top">
         <span class="badge-header">СК «Сириус»</span>
@@ -470,25 +361,20 @@
       <p>Юрлица, особенности объектов, счета, оплаты и остатки</p>
     </header>
 
-    <!-- Панель управления -->
     <div class="toolbar">
       <div class="toolbar-title">Объекты компании (12)</div>
       <button type="button" class="toggle-all-btn" onclick="toggleAllCards()">Раскрыть / Свернуть все</button>
     </div>
 
-    <!-- Список адаптивных 2-уровневых карточек -->
     <div class="cards-list">
-
-      <!-- 1. ООО СПЕКТР - Счёт 53 -->
-      <details class="smr-card">
+<details class="smr-card">
         <summary class="card-summary">
           <div class="card-org-line">
             <span class="card-number">#1</span>
             <div class="card-org-name">ООО «СПЕКТР»:</div>
-            <div class="card-feature">поручни пандуса + крыльцо (65,5 м.п., г. Красноярск)</div>
-            <div class="card-doc-tag">Счёт-договор № 53 от 20.08.2026</div>
+            <div class="card-feature">г. Красноярск</div>
+            <div class="card-doc-tag">счёт № 53</div>
           </div>
-
           <div class="finance-grid">
             <div class="fin-col">
               <span class="fin-label">К оплате</span>
@@ -503,43 +389,21 @@
               <span class="fin-amount remain">385 105 ₽</span>
             </div>
           </div>
-
           <div class="pay-progress-bar">
             <div class="pay-progress-fill" style="width: 30%;"></div>
           </div>
-
           <div class="card-footer-hint">
-            <span class="pay-percent-text">🟡 Аванс 30,0% зачислен</span>
-            <span class="open-hint-text">Подробнее <span class="arrow">▼</span></span>
+            <span class="pay-percent-text">🟡 Аванс 30,0%</span>
+            <span class="open-hint-text">Подробнее <span class="arrow">&#9660;</span></span>
           </div>
         </summary>
-
         <div class="card-body">
           <div class="detail-section">
-            <div class="detail-title">📍 Краткое описание объекта</div>
+            <div class="detail-title">&#128205; Краткое описание объекта</div>
             <div class="detail-text">
-              <strong>г. Красноярск:</strong> Поручни пандуса и лестницы крыльца входной группы, зеркальная нержавеющая сталь AISI 304. Всего <strong>65,50 пог. м</strong> под ключ.
+              <strong>г. Красноярск:</strong> Поручни пандуса (49 м.п., 2 ригеля) + поручни лестницы крыльца (16,5 м.п., 3 ригеля), AISI 304, всего 65,5 м.п.
             </div>
           </div>
-
-          <!-- Строки выставленного счёта -->
-          <div class="invoice-lines-block">
-            <div class="invoice-lines-title">📄 Позиции по счёту № 53:</div>
-            <div class="invoice-line-item">
-              <div class="inv-name">1. Поручни пандуса H=900/700 мм (2 ригеля, AISI 304) <span>— 49,0 м.п. × 8 500 ₽</span></div>
-              <div class="inv-cost">416 500 ₽</div>
-            </div>
-            <div class="invoice-line-item">
-              <div class="inv-name">2. Поручни лестницы крыльца H=900 мм (3 ригеля, AISI 304) <span>— 16,5 м.п. × 8 100 ₽</span></div>
-              <div class="inv-cost">133 650 ₽</div>
-            </div>
-          </div>
-
-          <div class="cost-box-simple">
-            <span class="cost-box-lbl">Себестоимость материалов</span>
-            <span class="cost-box-val">~172 400 ₽</span>
-          </div>
-
           <div class="status-bottom-bar">
             <span class="status-lbl">Статус выполнения:</span>
             <span class="status-val-pill kp">🟡 Отправлено КП / счёт</span>
@@ -547,16 +411,14 @@
         </div>
       </details>
 
-      <!-- 2. ИП Шамрай - Счёт 81 -->
-      <details class="smr-card">
+<details class="smr-card">
         <summary class="card-summary">
           <div class="card-org-line">
             <span class="card-number">#2</span>
             <div class="card-org-name">ИП Шамрай А.Л.:</div>
-            <div class="card-feature">Суд Ленинского района, ул. Коломенская 4а (ограждения + пандус 32,8 м.п.)</div>
-            <div class="card-doc-tag">Счёт № 81 / Договор № 2 от 31.08.2026</div>
+            <div class="card-feature">г. Красноярск, ул. Коломенская, д. 4а (Ленинский суд)</div>
+            <div class="card-doc-tag">счёт № 81</div>
           </div>
-
           <div class="finance-grid">
             <div class="fin-col">
               <span class="fin-label">К оплате</span>
@@ -571,43 +433,21 @@
               <span class="fin-amount remain">185 000 ₽</span>
             </div>
           </div>
-
           <div class="pay-progress-bar">
-            <div class="pay-progress-fill" style="width: 29.9%;"></div>
+            <div class="pay-progress-fill" style="width: 30%;"></div>
           </div>
-
           <div class="card-footer-hint">
-            <span class="pay-percent-text">🟡 Аванс 29,9% зачислен</span>
-            <span class="open-hint-text">Подробнее <span class="arrow">▼</span></span>
+            <span class="pay-percent-text">🟡 Аванс 29,9%</span>
+            <span class="open-hint-text">Подробнее <span class="arrow">&#9660;</span></span>
           </div>
         </summary>
-
         <div class="card-body">
           <div class="detail-section">
-            <div class="detail-title">📍 Краткое описание объекта</div>
+            <div class="detail-title">&#128205; Краткое описание объекта</div>
             <div class="detail-text">
-              <strong>г. Красноярск, ул. Коломенская 4а (Суд Ленинского р-на):</strong> Ограждения лестниц и двухуровневый пандус, AISI 304. Всего <strong>32,80 м.п.</strong> под ключ с монтажом.
+              <strong>г. Красноярск, ул. Коломенская, д. 4а (Ленинский суд):</strong> Лестничные ограждения H=1200 мм (10,8 м.п.) + двухуровневые поручни пандуса H=900/700 мм (22,0 м.п.), AISI 304
             </div>
           </div>
-
-          <!-- Строки выставленного счёта -->
-          <div class="invoice-lines-block">
-            <div class="invoice-lines-title">📄 Позиции по счёту № 81:</div>
-            <div class="invoice-line-item">
-              <div class="inv-name">1. Ограждения лестниц H=1200 мм (3 ригеля, AISI 304) <span>— 10,8 м.п. × 8 000 ₽</span></div>
-              <div class="inv-cost">86 400 ₽</div>
-            </div>
-            <div class="invoice-line-item">
-              <div class="inv-name">2. Двухуровневые поручни пандуса H=900/700 мм (AISI 304) <span>— 22,0 м.п. × 8 072,73 ₽</span></div>
-              <div class="inv-cost">177 600 ₽</div>
-            </div>
-          </div>
-
-          <div class="cost-box-simple">
-            <span class="cost-box-lbl">Себестоимость материалов</span>
-            <span class="cost-box-val">83 588 ₽</span>
-          </div>
-
           <div class="status-bottom-bar">
             <span class="status-lbl">Статус выполнения:</span>
             <span class="status-val-pill kp">🟡 Отправлено КП / счёт</span>
@@ -615,16 +455,14 @@
         </div>
       </details>
 
-      <!-- 3. ООО Спринт - Счёт 79 -->
-      <details class="smr-card">
+<details class="smr-card">
         <summary class="card-summary">
           <div class="card-org-line">
             <span class="card-number">#3</span>
-            <div class="card-org-name">ООО «Спринт» (Мастер строй):</div>
-            <div class="card-feature">колесоотбойники 650 мм + 2300 мм (12 шт., г. Красноярск)</div>
-            <div class="card-doc-tag">Счёт-договор № 79 от 09.09.2026</div>
+            <div class="card-org-name">ООО «Спринт» / ООО «Мастер строй»:</div>
+            <div class="card-feature">г. Красноярск</div>
+            <div class="card-doc-tag">счёт № 79</div>
           </div>
-
           <div class="finance-grid">
             <div class="fin-col">
               <span class="fin-label">К оплате</span>
@@ -639,43 +477,21 @@
               <span class="fin-amount zero">0 ₽</span>
             </div>
           </div>
-
           <div class="pay-progress-bar">
             <div class="pay-progress-fill" style="width: 100%;"></div>
           </div>
-
           <div class="card-footer-hint">
-            <span class="pay-percent-text" style="color: var(--success);">🟢 100% Оплачено полностью</span>
-            <span class="open-hint-text">Подробнее <span class="arrow">▼</span></span>
+            <span class="pay-percent-text">🟢 100% Оплачено</span>
+            <span class="open-hint-text">Подробнее <span class="arrow">&#9660;</span></span>
           </div>
         </summary>
-
         <div class="card-body">
           <div class="detail-section">
-            <div class="detail-title">📍 Краткое описание объекта</div>
+            <div class="detail-title">&#128205; Краткое описание объекта</div>
             <div class="detail-text">
-              <strong>г. Красноярск:</strong> Серия напольных прямых нержавеющих колесоотбойников, AISI 304. Всего <strong>12 шт. (14,40 м.п.)</strong>.
+              <strong>г. Красноярск:</strong> Изготовление и монтаж серии прямых колесоотбойников: 8 шт. \times 650 мм и 4 шт. \times 2300 мм (12 шт., 14,4 м.п.)
             </div>
           </div>
-
-          <!-- Строки выставленного счёта -->
-          <div class="invoice-lines-block">
-            <div class="invoice-lines-title">📄 Позиции по счёту № 79:</div>
-            <div class="invoice-line-item">
-              <div class="inv-name">1. Колесоотбойник прямой 650 мм (нерж. сталь) <span>— 8 шт. × 2 900 ₽</span></div>
-              <div class="inv-cost">23 200 ₽</div>
-            </div>
-            <div class="invoice-line-item">
-              <div class="inv-name">2. Колесоотбойник прямой 2300 мм (нерж. сталь) <span>— 4 шт. × 10 500 ₽</span></div>
-              <div class="inv-cost">42 000 ₽</div>
-            </div>
-          </div>
-
-          <div class="cost-box-simple">
-            <span class="cost-box-lbl">Себестоимость материалов</span>
-            <span class="cost-box-val">21 500 ₽</span>
-          </div>
-
           <div class="status-bottom-bar">
             <span class="status-lbl">Статус выполнения:</span>
             <span class="status-val-pill done">🟢 Объект выполнен</span>
@@ -683,16 +499,14 @@
         </div>
       </details>
 
-      <!-- 4. ИП Шамрай - Счёт 86 -->
-      <details class="smr-card">
+<details class="smr-card">
         <summary class="card-summary">
           <div class="card-org-line">
             <span class="card-number">#4</span>
             <div class="card-org-name">ИП Шамрай А.Л.:</div>
-            <div class="card-feature">ограждение лестницы L=3,8 м (H=1200 мм, г. Красноярск)</div>
-            <div class="card-doc-tag">Счёт-договор № 86 от 25.09.2026</div>
+            <div class="card-feature">г. Красноярск</div>
+            <div class="card-doc-tag">счёт № 86</div>
           </div>
-
           <div class="finance-grid">
             <div class="fin-col">
               <span class="fin-label">К оплате</span>
@@ -707,39 +521,21 @@
               <span class="fin-amount zero">0 ₽</span>
             </div>
           </div>
-
           <div class="pay-progress-bar">
             <div class="pay-progress-fill" style="width: 100%;"></div>
           </div>
-
           <div class="card-footer-hint">
-            <span class="pay-percent-text" style="color: var(--success);">🟢 100% Оплачено полностью</span>
-            <span class="open-hint-text">Подробнее <span class="arrow">▼</span></span>
+            <span class="pay-percent-text">🟢 100% Оплачено</span>
+            <span class="open-hint-text">Подробнее <span class="arrow">&#9660;</span></span>
           </div>
         </summary>
-
         <div class="card-body">
           <div class="detail-section">
-            <div class="detail-title">📍 Краткое описание объекта</div>
+            <div class="detail-title">&#128205; Краткое описание объекта</div>
             <div class="detail-text">
-              <strong>г. Красноярск:</strong> Ограждение лестницы из нержавеющей стали L=3800 мм, H=1200 мм. Объем <strong>3,80 м.п.</strong> под ключ.
+              <strong>г. Красноярск:</strong> Изготовление и монтаж лестничного ограждения из нержавеющей стали L=3800 мм, H=1200 мм (1 шт.)
             </div>
           </div>
-
-          <!-- Строки выставленного счёта -->
-          <div class="invoice-lines-block">
-            <div class="invoice-lines-title">📄 Позиции по счёту № 86:</div>
-            <div class="invoice-line-item">
-              <div class="inv-name">1. Изготовление и монтаж лестничного ограждения L=3800 мм, H=1200 мм <span>— 1 шт.</span></div>
-              <div class="inv-cost">32 300 ₽</div>
-            </div>
-          </div>
-
-          <div class="cost-box-simple">
-            <span class="cost-box-lbl">Себестоимость материалов</span>
-            <span class="cost-box-val">~11 800 ₽</span>
-          </div>
-
           <div class="status-bottom-bar">
             <span class="status-lbl">Статус выполнения:</span>
             <span class="status-val-pill done">🟢 Объект выполнен</span>
@@ -747,16 +543,14 @@
         </div>
       </details>
 
-      <!-- 5. ООО СПЕКТР - Счёт 82 -->
-      <details class="smr-card">
+<details class="smr-card">
         <summary class="card-summary">
           <div class="card-org-line">
             <span class="card-number">#5</span>
             <div class="card-org-name">ООО «СПЕКТР»:</div>
-            <div class="card-feature">поручни крыльца 3,0 м.п. (3 ригеля, входная группа)</div>
-            <div class="card-doc-tag">Счёт-договор № 82 от 14.09.2026</div>
+            <div class="card-feature">г. Красноярск</div>
+            <div class="card-doc-tag">счёт № 82</div>
           </div>
-
           <div class="finance-grid">
             <div class="fin-col">
               <span class="fin-label">К оплате</span>
@@ -771,39 +565,21 @@
               <span class="fin-amount remain">13 700 ₽</span>
             </div>
           </div>
-
           <div class="pay-progress-bar">
-            <div class="pay-progress-fill" style="width: 53.9%;"></div>
+            <div class="pay-progress-fill" style="width: 54%;"></div>
           </div>
-
           <div class="card-footer-hint">
-            <span class="pay-percent-text">🟡 Аванс 53,9% зачислен</span>
-            <span class="open-hint-text">Подробнее <span class="arrow">▼</span></span>
+            <span class="pay-percent-text">🟡 Аванс 53,9%</span>
+            <span class="open-hint-text">Подробнее <span class="arrow">&#9660;</span></span>
           </div>
         </summary>
-
         <div class="card-body">
           <div class="detail-section">
-            <div class="detail-title">📍 Краткое описание объекта</div>
+            <div class="detail-title">&#128205; Краткое описание объекта</div>
             <div class="detail-text">
-              <strong>г. Красноярск:</strong> Ограждения лестницы крыльца: H=900 мм, 3 ригеля Ø16 мм, поручень Ø42,4 мм, AISI 304. Объем <strong>3,00 м.п.</strong> под ключ.
+              <strong>г. Красноярск:</strong> Ограждения лестницы крыльца входной группы: поручень H=900 мм, 3 ригеля Ø16 мм, труба Ø42,4 мм, AISI 304 (3,0 м.п.)
             </div>
           </div>
-
-          <!-- Строки выставленного счёта -->
-          <div class="invoice-lines-block">
-            <div class="invoice-lines-title">📄 Позиции по счёту № 82:</div>
-            <div class="invoice-line-item">
-              <div class="inv-name">1. Ограждения лестницы крыльца входной группы (AISI 304) <span>— 3,0 м.п. × 9 900 ₽</span></div>
-              <div class="inv-cost">29 700 ₽</div>
-            </div>
-          </div>
-
-          <div class="cost-box-simple">
-            <span class="cost-box-lbl">Себестоимость материалов</span>
-            <span class="cost-box-val">11 362 ₽</span>
-          </div>
-
           <div class="status-bottom-bar">
             <span class="status-lbl">Статус выполнения:</span>
             <span class="status-val-pill kp">🟡 Отправлено КП / счёт</span>
@@ -811,16 +587,14 @@
         </div>
       </details>
 
-      <!-- 6. ООО ТрансЖелДорПроект - КП 39 -->
-      <details class="smr-card">
+<details class="smr-card">
         <summary class="card-summary">
           <div class="card-org-line">
             <span class="card-number">#6</span>
             <div class="card-org-name">ООО «ТрансЖелДорПроект»:</div>
-            <div class="card-feature">Центральный парк, корпус ДЖД (комплекс 80,5 м.п., 5 марок)</div>
-            <div class="card-doc-tag">КП № 39 от 01.10.2026</div>
+            <div class="card-feature">г. Красноярск, Центральный парк (Учебный корпус ДЖД)</div>
+            <div class="card-doc-tag">КП № 39</div>
           </div>
-
           <div class="finance-grid">
             <div class="fin-col">
               <span class="fin-label">К оплате</span>
@@ -835,55 +609,21 @@
               <span class="fin-amount remain">757 800 ₽</span>
             </div>
           </div>
-
           <div class="pay-progress-bar">
             <div class="pay-progress-fill" style="width: 0%;"></div>
           </div>
-
           <div class="card-footer-hint">
-            <span class="pay-percent-text">⚪ Ожидается согласование / аванс</span>
-            <span class="open-hint-text">Подробнее <span class="arrow">▼</span></span>
+            <span class="pay-percent-text">⚪ Ожидает оплаты</span>
+            <span class="open-hint-text">Подробнее <span class="arrow">&#9660;</span></span>
           </div>
         </summary>
-
         <div class="card-body">
           <div class="detail-section">
-            <div class="detail-title">📍 Краткое описание объекта</div>
+            <div class="detail-title">&#128205; Краткое описание объекта</div>
             <div class="detail-text">
-              <strong>г. Красноярск, Центральный парк (Корпус ДЖД):</strong> Комплекс ограждений 80,54 м.п. (марши, атриумы с частоколом, пристенные поручни, уличный пандус МГН), AISI 304.
+              <strong>г. Красноярск, Центральный парк (Учебный корпус ДЖД):</strong> Комплекс ограждений 80,54 м.п.: марши с ригелями, пристенные поручни Ø42,4 мм, атриумы с частоколом, уличный пандус МГН AISI 304
             </div>
           </div>
-
-          <!-- Строки выставленного КП -->
-          <div class="invoice-lines-block">
-            <div class="invoice-lines-title">📄 Позиции по КП № 39:</div>
-            <div class="invoice-line-item">
-              <div class="inv-name">1. Ог-1 Площадки лестниц H=1200 мм (6 ригелей) <span>— 1,64 м × 9 600 ₽</span></div>
-              <div class="inv-cost">15 800 ₽</div>
-            </div>
-            <div class="invoice-line-item">
-              <div class="inv-name">2. Ог-2 Марши лестниц H=1200 мм (6 ригелей, боковой монтаж) <span>— 33,10 м × 9 600 ₽</span></div>
-              <div class="inv-cost">317 800 ₽</div>
-            </div>
-            <div class="invoice-line-item">
-              <div class="inv-name">3. Ог-3 Пристенный поручень Ø42,4 мм под приварку <span>— 10,90 м × 3 200 ₽</span></div>
-              <div class="inv-cost">34 900 ₽</div>
-            </div>
-            <div class="invoice-line-item">
-              <div class="inv-name">4. Ог-5 Атриумы с вертикальным частоколом Ø16 мм <span>— 20,40 м × 12 400 ₽</span></div>
-              <div class="inv-cost">253 000 ₽</div>
-            </div>
-            <div class="invoice-line-item">
-              <div class="inv-name">5. Ог-6 Уличный пандус МГН 900/700 мм + отбойник (AISI 304) <span>— 14,50 м × 9 400 ₽</span></div>
-              <div class="inv-cost">136 300 ₽</div>
-            </div>
-          </div>
-
-          <div class="cost-box-simple">
-            <span class="cost-box-lbl">Себестоимость материалов</span>
-            <span class="cost-box-val">242 029 ₽</span>
-          </div>
-
           <div class="status-bottom-bar">
             <span class="status-lbl">Статус выполнения:</span>
             <span class="status-val-pill kp">🟡 Отправлено КП / счёт</span>
@@ -891,16 +631,14 @@
         </div>
       </details>
 
-      <!-- 7. ИП Сенькова - Счёт 87 -->
-      <details class="smr-card">
+<details class="smr-card">
         <summary class="card-summary">
           <div class="card-org-line">
             <span class="card-number">#7</span>
             <div class="card-org-name">ИП Сенькова Ю.Ю.:</div>
-            <div class="card-feature">г. Зеленогорск, ул. Комсомольская 23Ж (ограждения 1200 мм, труба Ø50 мм, 9 м.п.)</div>
-            <div class="card-doc-tag">Счёт-договор № 87</div>
+            <div class="card-feature">г. Зеленогорск, ул. Комсомольская, д. 23Ж</div>
+            <div class="card-doc-tag">счёт № 87</div>
           </div>
-
           <div class="finance-grid">
             <div class="fin-col">
               <span class="fin-label">К оплате</span>
@@ -915,43 +653,21 @@
               <span class="fin-amount remain">180 100 ₽</span>
             </div>
           </div>
-
           <div class="pay-progress-bar">
             <div class="pay-progress-fill" style="width: 0%;"></div>
           </div>
-
           <div class="card-footer-hint">
-            <span class="pay-percent-text">⚪ Ожидается предоплата</span>
-            <span class="open-hint-text">Подробнее <span class="arrow">▼</span></span>
+            <span class="pay-percent-text">⚪ Ожидает оплаты</span>
+            <span class="open-hint-text">Подробнее <span class="arrow">&#9660;</span></span>
           </div>
         </summary>
-
         <div class="card-body">
           <div class="detail-section">
-            <div class="detail-title">📍 Краткое описание объекта</div>
+            <div class="detail-title">&#128205; Краткое описание объекта</div>
             <div class="detail-text">
-              <strong>г. Зеленогорск, ул. Комсомольская 23Ж:</strong> Лестничные ограждения H=1200 мм с многоуровневыми поручнями из трубы Ø50,8 мм. Всего 3 секции по 3 м = <strong>9,00 м.п.</strong>
+              <strong>г. Зеленогорск, ул. Комсомольская, д. 23Ж:</strong> Лестничные ограждения H=1200 мм: 2 секции с тройным поручнем Ø50,8 мм + 1 секция с пятерным поручнем Ø50,8 мм (9,0 м.п.)
             </div>
           </div>
-
-          <!-- Строки выставленного счёта -->
-          <div class="invoice-lines-block">
-            <div class="invoice-lines-title">📄 Позиции по счёту № 87:</div>
-            <div class="invoice-line-item">
-              <div class="inv-name">1. Боковые ограждения с тройным поручнем Ø50,8 мм L=3,0 м <span>— 2 шт. × 50 600 ₽</span></div>
-              <div class="inv-cost">101 200 ₽</div>
-            </div>
-            <div class="invoice-line-item">
-              <div class="inv-name">2. Центральное ограждение-разделитель с 5 поручнями Ø50,8 мм L=3,0 м <span>— 1 шт. × 78 900 ₽</span></div>
-              <div class="inv-cost">78 900 ₽</div>
-            </div>
-          </div>
-
-          <div class="cost-box-simple">
-            <span class="cost-box-lbl">Себестоимость материалов</span>
-            <span class="cost-box-val">60 050 ₽</span>
-          </div>
-
           <div class="status-bottom-bar">
             <span class="status-lbl">Статус выполнения:</span>
             <span class="status-val-pill kp">🟡 Отправлено КП / счёт</span>
@@ -959,16 +675,14 @@
         </div>
       </details>
 
-      <!-- 8. ИП Гасанов - Счёт 92 -->
-      <details class="smr-card">
+<details class="smr-card">
         <summary class="card-summary">
           <div class="card-org-line">
             <span class="card-number">#8</span>
             <div class="card-org-name">ИП Гасанов Э.Ч.:</div>
-            <div class="card-feature">с. Шалинское (входная группа с калиткой «Антипаника» + пандус 10,34 м.п.)</div>
-            <div class="card-doc-tag">Счёт-договор № 92</div>
+            <div class="card-feature">с. Шалинское, входная группа</div>
+            <div class="card-doc-tag">счёт № 92</div>
           </div>
-
           <div class="finance-grid">
             <div class="fin-col">
               <span class="fin-label">К оплате</span>
@@ -983,43 +697,21 @@
               <span class="fin-amount remain">119 000 ₽</span>
             </div>
           </div>
-
           <div class="pay-progress-bar">
             <div class="pay-progress-fill" style="width: 0%;"></div>
           </div>
-
           <div class="card-footer-hint">
-            <span class="pay-percent-text">⚪ Ожидается предоплата</span>
-            <span class="open-hint-text">Подробнее <span class="arrow">▼</span></span>
+            <span class="pay-percent-text">⚪ Ожидает оплаты</span>
+            <span class="open-hint-text">Подробнее <span class="arrow">&#9660;</span></span>
           </div>
         </summary>
-
         <div class="card-body">
           <div class="detail-section">
-            <div class="detail-title">📍 Краткое описание объекта</div>
+            <div class="detail-title">&#128205; Краткое описание объекта</div>
             <div class="detail-text">
-              <strong>с. Шалинское:</strong> Ограждение входной группы с распашной калиткой «Антипаника» (6,34 м) + двухуровневые поручни пандуса (4,0 м), сталь AISI 201. Всего <strong>10,34 м.п.</strong>
+              <strong>с. Шалинское, входная группа:</strong> Ограждения с калиткой «Антипаника» 6,34 м.п. (4 ригеля) + двухуровневые поручни пандуса 4,0 м.п. (всего 10,34 м.п., AISI 201)
             </div>
           </div>
-
-          <!-- Строки выставленного счёта -->
-          <div class="invoice-lines-block">
-            <div class="invoice-lines-title">📄 Позиции по счёту № 92:</div>
-            <div class="invoice-line-item">
-              <div class="inv-name">1. Ограждение входной группы с калиткой «Антипаника» (4 ригеля, 6,34 м) <span>— компл.</span></div>
-              <div class="inv-cost">85 000 ₽</div>
-            </div>
-            <div class="invoice-line-item">
-              <div class="inv-name">2. Двухуровневые поручни пандуса H=900/700 мм <span>— 4,0 м.п. × 8 500 ₽</span></div>
-              <div class="inv-cost">34 000 ₽</div>
-            </div>
-          </div>
-
-          <div class="cost-box-simple">
-            <span class="cost-box-lbl">Себестоимость материалов</span>
-            <span class="cost-box-val">31 105 ₽</span>
-          </div>
-
           <div class="status-bottom-bar">
             <span class="status-lbl">Статус выполнения:</span>
             <span class="status-val-pill prod">🔵 Заказаны материалы</span>
@@ -1027,16 +719,14 @@
         </div>
       </details>
 
-      <!-- 9. ООО Легранд 88 - Счёт 84 -->
-      <details class="smr-card">
+<details class="smr-card">
         <summary class="card-summary">
           <div class="card-org-line">
             <span class="card-number">#9</span>
             <div class="card-org-name">ООО «Легранд 88»:</div>
-            <div class="card-feature">г. Зеленогорск, поликлиника КБ № 42 (крыльцо взрослого отд., 6,8 м.п.)</div>
-            <div class="card-doc-tag">Счёт-договор № 84</div>
+            <div class="card-feature">г. Зеленогорск, ул. Комсомольская, д. 23Ж (КБ № 42)</div>
+            <div class="card-doc-tag">счёт № 84</div>
           </div>
-
           <div class="finance-grid">
             <div class="fin-col">
               <span class="fin-label">К оплате</span>
@@ -1051,39 +741,21 @@
               <span class="fin-amount remain">78 000 ₽</span>
             </div>
           </div>
-
           <div class="pay-progress-bar">
             <div class="pay-progress-fill" style="width: 0%;"></div>
           </div>
-
           <div class="card-footer-hint">
-            <span class="pay-percent-text">⚪ Ожидается предоплата</span>
-            <span class="open-hint-text">Подробнее <span class="arrow">▼</span></span>
+            <span class="pay-percent-text">⚪ Ожидает оплаты</span>
+            <span class="open-hint-text">Подробнее <span class="arrow">&#9660;</span></span>
           </div>
         </summary>
-
         <div class="card-body">
           <div class="detail-section">
-            <div class="detail-title">📍 Краткое описание объекта</div>
+            <div class="detail-title">&#128205; Краткое описание объекта</div>
             <div class="detail-text">
-              <strong>г. Зеленогорск, ул. Комсомольская 23Ж (КБ № 42):</strong> Наружные уличные ограждения крыльца взрослого отделения, сталь AISI 304 (стойки Ø42,4 мм, 3 ригеля Ø16 мм). Объем <strong>6,80 м.п.</strong>
+              <strong>г. Зеленогорск, ул. Комсомольская, д. 23Ж (КБ № 42):</strong> Наружные уличные ограждения крыльца взрослого отделения из AISI 304 (6,8 м.п., стойки Ø42,4 мм, 3 ригеля Ø16 мм)
             </div>
           </div>
-
-          <!-- Строки выставленного счёта -->
-          <div class="invoice-lines-block">
-            <div class="invoice-lines-title">📄 Позиции по счёту № 84:</div>
-            <div class="invoice-line-item">
-              <div class="inv-name">1. Ограждения крыльца взрослого отделения (ОГ-3, ОГ-4, ОГ-5, AISI 304) <span>— 6,8 м.п. × 11 471 ₽</span></div>
-              <div class="inv-cost">78 000 ₽</div>
-            </div>
-          </div>
-
-          <div class="cost-box-simple">
-            <span class="cost-box-lbl">Себестоимость материалов</span>
-            <span class="cost-box-val">28 618 ₽</span>
-          </div>
-
           <div class="status-bottom-bar">
             <span class="status-lbl">Статус выполнения:</span>
             <span class="status-val-pill kp">🟡 Отправлено КП / счёт</span>
@@ -1091,16 +763,14 @@
         </div>
       </details>
 
-      <!-- 10. ООО СПЕЛЕОСТРОЙ - Счёт 91 -->
-      <details class="smr-card">
+<details class="smr-card">
         <summary class="card-summary">
           <div class="card-org-line">
             <span class="card-number">#10</span>
             <div class="card-org-name">ООО «СПЕЛЕОСТРОЙ»:</div>
-            <div class="card-feature">Аэропорт Красноярск (колесоотбойники Ø50 мм, 13,8 м.п.)</div>
-            <div class="card-doc-tag">Счёт-договор № 91</div>
+            <div class="card-feature">г. Красноярск, Аэропорт (терминал)</div>
+            <div class="card-doc-tag">счёт № 91</div>
           </div>
-
           <div class="finance-grid">
             <div class="fin-col">
               <span class="fin-label">К оплате</span>
@@ -1115,39 +785,21 @@
               <span class="fin-amount remain">22 900 ₽</span>
             </div>
           </div>
-
           <div class="pay-progress-bar">
-            <div class="pay-progress-fill" style="width: 69.8%;"></div>
+            <div class="pay-progress-fill" style="width: 70%;"></div>
           </div>
-
           <div class="card-footer-hint">
-            <span class="pay-percent-text">🟡 Аванс 69,8% зачислен</span>
-            <span class="open-hint-text">Подробнее <span class="arrow">▼</span></span>
+            <span class="pay-percent-text">🟡 Аванс 69,8%</span>
+            <span class="open-hint-text">Подробнее <span class="arrow">&#9660;</span></span>
           </div>
         </summary>
-
         <div class="card-body">
           <div class="detail-section">
-            <div class="detail-title">📍 Краткое описание объекта</div>
+            <div class="detail-title">&#128205; Краткое описание объекта</div>
             <div class="detail-text">
-              <strong>г. Красноярск, Аэропорт (терминал):</strong> Напольные колесоотбойники Ø50,8 мм (стойки Ø25 мм, скрытый монтаж на анкеры, AISI 201 зеркало). Объем <strong>13,80 м.п.</strong>
+              <strong>г. Красноярск, Аэропорт (терминал):</strong> Напольные колесоотбойники Ø50,8 мм: прямая секция 5,4 м + угловая секция с поворотом 90° 8,4 м (всего 13,8 м.п.)
             </div>
           </div>
-
-          <!-- Строки выставленного счёта -->
-          <div class="invoice-lines-block">
-            <div class="invoice-lines-title">📄 Позиции по счёту № 91:</div>
-            <div class="invoice-line-item">
-              <div class="inv-name">1. Колесоотбойник напольный нержавеющий Ø50,8 мм <span>— 13,8 м.п. × 5 500 ₽</span></div>
-              <div class="inv-cost">75 900 ₽</div>
-            </div>
-          </div>
-
-          <div class="cost-box-simple">
-            <span class="cost-box-lbl">Себестоимость материалов</span>
-            <span class="cost-box-val">17 670 ₽</span>
-          </div>
-
           <div class="status-bottom-bar">
             <span class="status-lbl">Статус выполнения:</span>
             <span class="status-val-pill prod">🔵 Заказаны материалы</span>
@@ -1155,16 +807,14 @@
         </div>
       </details>
 
-      <!-- 11. КГБУ СО Пансионат Ветеран - Контракт 86/07.26 -->
-      <details class="smr-card">
+<details class="smr-card">
         <summary class="card-summary">
           <div class="card-org-line">
             <span class="card-number">#11</span>
             <div class="card-org-name">КГБУ СО «Пансионат "Ветеран"»:</div>
-            <div class="card-feature">ул. Елены Стасовой 28 (откидные поручни для санузлов МГН, 5 шт.)</div>
-            <div class="card-doc-tag">Контракт № 86/07.26 (223-ФЗ)</div>
+            <div class="card-feature">г. Красноярск, ул. Елены Стасовой, д. 28</div>
+            <div class="card-doc-tag">контракт № 86/07.26</div>
           </div>
-
           <div class="finance-grid">
             <div class="fin-col">
               <span class="fin-label">К оплате</span>
@@ -1179,39 +829,21 @@
               <span class="fin-amount remain">48 500 ₽</span>
             </div>
           </div>
-
           <div class="pay-progress-bar">
             <div class="pay-progress-fill" style="width: 0%;"></div>
           </div>
-
           <div class="card-footer-hint">
-            <span class="pay-percent-text">⚪ Постоплата по 223-ФЗ</span>
-            <span class="open-hint-text">Подробнее <span class="arrow">▼</span></span>
+            <span class="pay-percent-text">⚪ Постоплата (223-ФЗ)</span>
+            <span class="open-hint-text">Подробнее <span class="arrow">&#9660;</span></span>
           </div>
         </summary>
-
         <div class="card-body">
           <div class="detail-section">
-            <div class="detail-title">📍 Краткое описание объекта</div>
+            <div class="detail-title">&#128205; Краткое описание объекта</div>
             <div class="detail-text">
-              <strong>г. Красноярск, ул. Елены Стасовой 28:</strong> Откидные настенные консольные поручни для санузлов МГН (800×200 мм, полированная нержавеющая сталь AISI 304). Всего <strong>5 комплектов</strong> под ключ.
+              <strong>г. Красноярск, ул. Елены Стасовой, д. 28:</strong> Откидные настенные консольные поручни для санузлов МГН (800\times 200 мм, сталь AISI 304, 5 шт./комплектов)
             </div>
           </div>
-
-          <!-- Строки выставленного счёта -->
-          <div class="invoice-lines-block">
-            <div class="invoice-lines-title">📄 Позиции по контракту № 86/07.26:</div>
-            <div class="invoice-line-item">
-              <div class="inv-name">1. Откидной консольный поручень для МГН (800×200 мм, AISI 304) <span>— 5 шт. × 9 700 ₽</span></div>
-              <div class="inv-cost">48 500 ₽</div>
-            </div>
-          </div>
-
-          <div class="cost-box-simple">
-            <span class="cost-box-lbl">Себестоимость материалов</span>
-            <span class="cost-box-val">19 500 ₽</span>
-          </div>
-
           <div class="status-bottom-bar">
             <span class="status-lbl">Статус выполнения:</span>
             <span class="status-val-pill prod">🔵 Заказаны материалы</span>
@@ -1219,16 +851,14 @@
         </div>
       </details>
 
-      <!-- 12. ООО Районная Компания - Счёт-договор 94 -->
-      <details class="smr-card">
+<details class="smr-card">
         <summary class="card-summary">
           <div class="card-org-line">
             <span class="card-number">#12</span>
             <div class="card-org-name">ООО «Районная Компания»:</div>
-            <div class="card-feature">ул. Юшкова 38А п1 (пристенный поручень 2,8 м.п.)</div>
-            <div class="card-doc-tag">Счёт-договор № 94 от 07.10.2026</div>
+            <div class="card-feature">г. Красноярск, ул. Юшкова, д. 38А, п. 1</div>
+            <div class="card-doc-tag">счёт № 94</div>
           </div>
-
           <div class="finance-grid">
             <div class="fin-col">
               <span class="fin-label">К оплате</span>
@@ -1243,138 +873,77 @@
               <span class="fin-amount remain">10 100 ₽</span>
             </div>
           </div>
-
           <div class="pay-progress-bar">
             <div class="pay-progress-fill" style="width: 0%;"></div>
           </div>
-
           <div class="card-footer-hint">
-            <span class="pay-percent-text">🟡 Ожидает оплаты (100% предоплата)</span>
-            <span class="open-hint-text">Подробнее <span class="arrow">▼</span></span>
+            <span class="pay-percent-text">⚪ Ожидает оплаты</span>
+            <span class="open-hint-text">Подробнее <span class="arrow">&#9660;</span></span>
           </div>
         </summary>
-
         <div class="card-body">
           <div class="detail-section">
-            <div class="detail-title">📍 Краткое описание объекта</div>
+            <div class="detail-title">&#128205; Краткое описание объекта</div>
             <div class="detail-text">
-              <strong>г. Красноярск, ул. Юшкова, д. 38А, п. 1:</strong> Изготовление, доставка и монтаж пристенного прямого поручня из зеркальной нержавеющей стали AISI 304 Ø42,4×1,5 мм (L=2800 мм, 4 пристенных кронштейна под приварку, полусферические заглушки).
+              <strong>г. Красноярск, ул. Юшкова, д. 38А, п. 1:</strong> Поручень пристенный прямой из нержавеющей стали AISI 304 L=2800 мм (2,80 м.п., 1 шт.)
             </div>
           </div>
-
-          <!-- Строки выставленного счёта -->
-          <div class="invoice-lines-block">
-            <div class="invoice-lines-title">📄 Позиции по счёту № 94 от 07.10.2026:</div>
-            <div class="invoice-line-item">
-              <div class="inv-name">1. Поручень пристенный прямой L-2800 мм <span>— 1 шт.</span></div>
-              <div class="inv-cost">8 100 ₽</div>
-            </div>
-            <div class="invoice-line-item">
-              <div class="inv-name">2. Доставка и монтажные работы (ул. Юшкова, д.38А п1) <span>— 1 шт.</span></div>
-              <div class="inv-cost">2 000 ₽</div>
-            </div>
-          </div>
-
-          <div class="cost-box-simple">
-            <span class="cost-box-lbl">Себестоимость материалов</span>
-            <span class="cost-box-val">3 743 ₽</span>
-          </div>
-
           <div class="status-bottom-bar">
             <span class="status-lbl">Статус выполнения:</span>
             <span class="status-val-pill kp">🟡 Отправлено КП / счёт</span>
           </div>
         </div>
       </details>
-
     </div>
   </div>
 
   <script>
     const CORRECT_PIN = "1235";
     let enteredPin = "";
-
-    // Проверка сохраненной сессии (чтобы не вводить каждый раз при обновлении страницы в течение дня)
-    if (sessionStorage.getItem("sirius_auth") === "true") {
-      unlockPage();
-    }
-
+    if (sessionStorage.getItem("sirius_auth") === "true") { unlockPage(); }
     function updateDots() {
       for (let i = 0; i < 4; i++) {
         const dot = document.getElementById("dot" + i);
-        if (i < enteredPin.length) {
-          dot.classList.add("filled");
-        } else {
-          dot.classList.remove("filled");
-        }
+        if (i < enteredPin.length) { dot.classList.add("filled"); } else { dot.classList.remove("filled"); }
       }
     }
-
     function pressKey(num) {
       if (enteredPin.length < 4) {
-        enteredPin += num;
-        updateDots();
-        document.getElementById("pinError").innerText = "";
-
-        if (enteredPin.length === 4) {
-          setTimeout(verifyPin, 100);
-        }
+        enteredPin += num; updateDots(); document.getElementById("pinError").innerText = "";
+        if (enteredPin.length === 4) { setTimeout(verifyPin, 100); }
       }
     }
-
-    function clearPin() {
-      enteredPin = "";
-      updateDots();
-      document.getElementById("pinError").innerText = "";
-    }
-
+    function clearPin() { enteredPin = ""; updateDots(); document.getElementById("pinError").innerText = ""; }
     function backspacePin() {
-      if (enteredPin.length > 0) {
-        enteredPin = enteredPin.slice(0, -1);
-        updateDots();
-        document.getElementById("pinError").innerText = "";
-      }
+      if (enteredPin.length > 0) { enteredPin = enteredPin.slice(0, -1); updateDots(); document.getElementById("pinError").innerText = ""; }
     }
-
     function verifyPin() {
-      if (enteredPin === CORRECT_PIN) {
-        sessionStorage.setItem("sirius_auth", "true");
-        unlockPage();
-      } else {
+      if (enteredPin === CORRECT_PIN) { sessionStorage.setItem("sirius_auth", "true"); unlockPage(); }
+      else {
         const box = document.getElementById("pinBox");
-        const err = document.getElementById("pinError");
-        err.innerText = "Неверный PIN-код!";
+        document.getElementById("pinError").innerText = "Неверный PIN-код!";
         box.classList.add("shake");
-        setTimeout(() => {
-          box.classList.remove("shake");
-          clearPin();
-        }, 500);
+        setTimeout(() => { box.classList.remove("shake"); clearPin(); }, 500);
       }
     }
-
     function unlockPage() {
       document.getElementById("pin-overlay").style.display = "none";
       document.getElementById("mainContent").style.display = "block";
     }
-
-    // Поддержка ввода с клавиатуры ПК
     window.addEventListener("keydown", function(e) {
       if (document.getElementById("pin-overlay").style.display !== "none") {
-        if (e.key >= "0" && e.key <= "9") {
-          pressKey(e.key);
-        } else if (e.key === "Backspace") {
-          backspacePin();
-        } else if (e.key === "Escape") {
-          clearPin();
-        }
+        if (e.key >= "0" && e.key <= "9") { pressKey(e.key); }
+        else if (e.key === "Backspace") { backspacePin(); }
+        else if (e.key === "Escape") { clearPin(); }
       }
     });
-
     function toggleAllCards() {
       const cards = document.querySelectorAll('.smr-card');
       const anyOpen = Array.from(cards).some(c => c.open);
       cards.forEach(c => c.open = !anyOpen);
     }
   </script>
+
+
 </body>
 </html>
