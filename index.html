@@ -464,7 +464,7 @@
     <header>
       <div class="header-top">
         <span class="badge-header">СК «Сириус»</span>
-        <span class="badge-header">05.10.2026</span>
+        <span class="badge-header">07.10.2026</span>
       </div>
       <h1>Ведомость объектов и оплат</h1>
       <p>Юрлица, особенности объектов, счета, оплаты и остатки</p>
@@ -472,7 +472,7 @@
 
     <!-- Панель управления -->
     <div class="toolbar">
-      <div class="toolbar-title">Объекты компании (11)</div>
+      <div class="toolbar-title">Объекты компании (12)</div>
       <button type="button" class="toggle-all-btn" onclick="toggleAllCards()">Раскрыть / Свернуть все</button>
     </div>
 
@@ -1215,6 +1215,74 @@
           <div class="status-bottom-bar">
             <span class="status-lbl">Статус выполнения:</span>
             <span class="status-val-pill prod">🔵 Заказаны материалы</span>
+          </div>
+        </div>
+      </details>
+
+      <!-- 12. ООО Районная Компания - Счёт-договор 94 -->
+      <details class="smr-card">
+        <summary class="card-summary">
+          <div class="card-org-line">
+            <span class="card-number">#12</span>
+            <div class="card-org-name">ООО «Районная Компания»:</div>
+            <div class="card-feature">ул. Юшкова 38А п1 (пристенный поручень 2,8 м.п.)</div>
+            <div class="card-doc-tag">Счёт-договор № 94 от 07.10.2026</div>
+          </div>
+
+          <div class="finance-grid">
+            <div class="fin-col">
+              <span class="fin-label">К оплате</span>
+              <span class="fin-amount total">10 100 ₽</span>
+            </div>
+            <div class="fin-col">
+              <span class="fin-label">Оплачено</span>
+              <span class="fin-amount zero">0 ₽</span>
+            </div>
+            <div class="fin-col">
+              <span class="fin-label">Остаток</span>
+              <span class="fin-amount remain">10 100 ₽</span>
+            </div>
+          </div>
+
+          <div class="pay-progress-bar">
+            <div class="pay-progress-fill" style="width: 0%;"></div>
+          </div>
+
+          <div class="card-footer-hint">
+            <span class="pay-percent-text">🟡 Ожидает оплаты (100% предоплата)</span>
+            <span class="open-hint-text">Подробнее <span class="arrow">▼</span></span>
+          </div>
+        </summary>
+
+        <div class="card-body">
+          <div class="detail-section">
+            <div class="detail-title">📍 Краткое описание объекта</div>
+            <div class="detail-text">
+              <strong>г. Красноярск, ул. Юшкова, д. 38А, п. 1:</strong> Изготовление, доставка и монтаж пристенного прямого поручня из зеркальной нержавеющей стали AISI 304 Ø42,4×1,5 мм (L=2800 мм, 4 пристенных кронштейна под приварку, полусферические заглушки).
+            </div>
+          </div>
+
+          <!-- Строки выставленного счёта -->
+          <div class="invoice-lines-block">
+            <div class="invoice-lines-title">📄 Позиции по счёту № 94 от 07.10.2026:</div>
+            <div class="invoice-line-item">
+              <div class="inv-name">1. Поручень пристенный прямой L-2800 мм <span>— 1 шт.</span></div>
+              <div class="inv-cost">8 100 ₽</div>
+            </div>
+            <div class="invoice-line-item">
+              <div class="inv-name">2. Доставка и монтажные работы (ул. Юшкова, д.38А п1) <span>— 1 шт.</span></div>
+              <div class="inv-cost">2 000 ₽</div>
+            </div>
+          </div>
+
+          <div class="cost-box-simple">
+            <span class="cost-box-lbl">Себестоимость материалов</span>
+            <span class="cost-box-val">3 743 ₽</span>
+          </div>
+
+          <div class="status-bottom-bar">
+            <span class="status-lbl">Статус выполнения:</span>
+            <span class="status-val-pill kp">🟡 Отправлено КП / счёт</span>
           </div>
         </div>
       </details>
