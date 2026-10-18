@@ -59,6 +59,39 @@
       font-weight: 600;
       letter-spacing: 0.3px;
     }
+    .header-dates {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      gap: 3px;
+      font-size: 11.5px;
+    }
+    @media (max-width: 650px) {
+      .header-dates {
+        align-items: flex-start;
+        width: 100%;
+        margin-top: 4px;
+      }
+    }
+    .header-date-row {
+      color: #e0f2fe;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .header-date-row .date-label {
+      color: #bfdbfe;
+      font-size: 11px;
+    }
+    .header-date-row .date-val {
+      color: #ffffff;
+      font-weight: 700;
+      background: rgba(255, 255, 255, 0.18);
+      padding: 1px 7px;
+      border-radius: 999px;
+      font-size: 11px;
+      letter-spacing: 0.3px;
+    }
     header h1 { font-size: 19px; font-weight: 800; line-height: 1.25; margin-bottom: 2px; }
     header p { color: #bfdbfe; font-size: 12.5px; line-height: 1.35; }
 
@@ -407,7 +440,10 @@
     <header>
       <div class="header-top">
         <span class="badge-header">СК «Сириус»</span>
-        <span class="badge-header">19.10.2026</span>
+        <div class="header-dates">
+          <div class="header-date-row"><span class="date-label">Последнее обновление:</span> <span class="date-val">19.10.2026</span></div>
+          <div class="header-date-row"><span class="date-label">Последняя сверка баланса:</span> <span class="date-val">19.10.2026</span></div>
+        </div>
       </div>
       <h1>Ведомость объектов и оплат</h1>
       <p>Юрлица, особенности объектов, счета, оплаты и остатки</p>
