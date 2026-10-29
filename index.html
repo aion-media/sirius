@@ -2,1189 +2,424 @@
 <html lang="ru">
 <head>
   <meta charset="UTF-8">
-  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
-  <meta http-equiv="Pragma" content="no-cache">
-  <meta http-equiv="Expires" content="0">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  <title>СК «Сириус» — Ведомость объектов СМР</title>
+  <title>СК СИРИУС | Закрытый финансовый реестр</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Montserrat:wght@700;800;900&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            sirius: {
+              dark: '#030712',
+              card: '#0f172a',
+              surface: '#1e293b',
+              gold: '#d4af37',
+              goldLight: '#f59e0b',
+              steel: '#94a3b8'
+            }
+          },
+          fontFamily: {
+            title: ['Montserrat', 'sans-serif'],
+            sans: ['Inter', 'sans-serif']
+          }
+        }
+      }
+    }
+  </script>
   <style>
-    :root {
-      --primary: #1e3a8a;
-      --primary-light: #2563eb;
-      --accent: #0284c7;
-      --success: #15803d;
-      --warning: #b45309;
-      --danger: #b91c1c;
-      --bg: #e0f2fe;
-      --card-bg: #ffffff;
-      --text-main: #0f172a;
-      --text-muted: #64748b;
-      --border: #bfdbfe;
-      --radius: 14px;
-      --shadow-sm: 0 4px 6px -1px rgba(15, 23, 42, 0.08), 0 2px 4px -2px rgba(15, 23, 42, 0.05);
-      --shadow-md: 0 10px 20px -3px rgba(15, 23, 42, 0.12), 0 4px 8px -4px rgba(15, 23, 42, 0.08);
-    }
-    * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
     body {
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-      background: linear-gradient(180deg, #bae6fd 0%, #e0f2fe 40%, #f0f9ff 100%);
-      background-attachment: fixed;
-      color: var(--text-main);
-      line-height: 1.45;
-      padding: 14px 10px;
+      background: radial-gradient(circle at 50% 0%, #1e293b 0%, #0a0f1d 50%, #030712 100%);
+      color: #f8fafc;
       min-height: 100vh;
+      font-family: 'Inter', sans-serif;
     }
-    .container { max-width: 860px; margin: 0 auto; }
-
-    header {
-      background: linear-gradient(135deg, #0f172a 0%, #1e3a8a 50%, #0369a1 100%);
-      border: 1px solid rgba(255, 255, 255, 0.15);
-      color: #ffffff;
-      padding: 18px 20px;
-      border-radius: var(--radius);
-      margin-bottom: 12px;
-      box-shadow: 0 10px 20px -5px rgba(15, 23, 42, 0.35);
+    .gold-glow {
+      box-shadow: 0 0 25px rgba(212, 175, 55, 0.2);
     }
-    .header-top {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      flex-wrap: wrap;
-      gap: 6px;
-      margin-bottom: 4px;
+    .gold-border {
+      border: 1px solid rgba(212, 175, 55, 0.35);
     }
-    .badge-header {
-      background: rgba(255, 255, 255, 0.2);
-      color: #ffffff;
-      padding: 3px 8px;
-      border-radius: 999px;
-      font-size: 11px;
-      font-weight: 600;
-      letter-spacing: 0.3px;
+    .glass-card {
+      background: rgba(15, 23, 42, 0.85);
+      backdrop-filter: blur(16px);
+      border: 1px solid rgba(255, 255, 255, 0.08);
     }
-    .header-dates {
-      display: flex;
-      flex-direction: column;
-      align-items: flex-end;
-      gap: 3px;
-      font-size: 11.5px;
+    .glass-card:hover {
+      border-color: rgba(212, 175, 55, 0.4);
     }
-    @media (max-width: 650px) {
-      .header-dates {
-        align-items: flex-start;
-        width: 100%;
-        margin-top: 4px;
-      }
-    }
-    .header-date-row {
-      color: #e0f2fe;
-      display: flex;
-      align-items: center;
-      gap: 6px;
-    }
-    .header-date-row .date-label {
-      color: #bfdbfe;
-      font-size: 11px;
-    }
-    .header-date-row .date-val {
-      color: #ffffff;
-      font-weight: 700;
-      background: rgba(255, 255, 255, 0.18);
-      padding: 1px 7px;
-      border-radius: 999px;
-      font-size: 11px;
-      letter-spacing: 0.3px;
-    }
-    header h1 { font-size: 19px; font-weight: 800; line-height: 1.25; margin-bottom: 2px; }
-    header p { color: #bfdbfe; font-size: 12.5px; line-height: 1.35; }
-
-    .finance-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 10px;
-      margin-bottom: 14px;
-    }
-    @media (max-width: 650px) {
-      .finance-grid {
-        grid-template-columns: 1fr;
-        gap: 8px;
-      }
-    }
-    .finance-card {
-      background: #ffffff;
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      padding: 12px 14px;
-      box-shadow: var(--shadow-sm);
-    }
-    .finance-card.success {
-      border-color: #86efac;
-      background: linear-gradient(180deg, #ffffff 0%, #f0fdf4 100%);
-    }
-    .finance-card.warning {
-      border-color: #fde68a;
-      background: linear-gradient(180deg, #ffffff 0%, #fffbeb 100%);
-    }
-    .finance-label {
-      font-size: 11px;
-      font-weight: 700;
-      color: var(--text-muted);
-      text-transform: uppercase;
-      letter-spacing: 0.5px;
-      margin-bottom: 4px;
-    }
-    .finance-value {
-      font-size: 19px;
-      font-weight: 800;
-      color: #0f172a;
-      line-height: 1.2;
-      margin-bottom: 3px;
-    }
-    .finance-value.success { color: #15803d; }
-    .finance-value.warning { color: #b45309; }
-    .finance-sub {
-      font-size: 11.5px;
-      font-weight: 600;
-      color: #64748b;
-    }
-    .finance-sub.success { color: #16a34a; }
-    .finance-sub.warning { color: #d97706; }
-
-    .toolbar {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 10px;
-      padding: 0 4px;
-    }
-    .toolbar-title {
-      font-size: 12px;
-      font-weight: 700;
-      color: #1e3a8a;
-      text-transform: uppercase;
-      letter-spacing: 0.5px;
-    }
-    .toggle-all-btn {
-      background: #ffffff;
-      border: 1px solid #93c5fd;
-      color: #0369a1;
-      font-size: 11.5px;
-      font-weight: 700;
-      padding: 5px 12px;
-      border-radius: 7px;
-      cursor: pointer;
-      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
-    }
-
-    .cards-list {
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-      margin-bottom: 20px;
-    }
-
-    .smr-card {
-      background: var(--card-bg);
-      border-radius: var(--radius);
-      border: 1px solid var(--border);
-      box-shadow: var(--shadow-sm);
-      overflow: hidden;
-      transition: box-shadow 0.2s ease, border-color 0.2s ease;
-    }
-    .smr-card[open] {
-      box-shadow: var(--shadow-md);
-      border-color: #cbd5e1;
-    }
-
-    .card-summary {
-      padding: 14px 14px 12px;
-      cursor: pointer;
-      list-style: none;
-      display: block;
-      user-select: none;
-    }
-    .card-summary::-webkit-details-marker { display: none; }
-
-    .card-org-line {
-      margin-bottom: 8px;
-      line-height: 1.35;
-    }
-    .card-number {
-      display: inline-block;
-      font-size: 10.5px;
-      font-weight: 700;
-      background: #f1f5f9;
-      color: var(--text-muted);
-      padding: 1px 5px;
-      border-radius: 4px;
-      margin-right: 4px;
-      vertical-align: middle;
-    }
-    .card-org-name {
-      font-size: 15.5px;
-      font-weight: 800;
-      color: var(--text-main);
-      display: inline;
-      vertical-align: middle;
-    }
-    .card-feature {
-      font-size: 13px;
-      font-weight: 400;
-      color: #334155;
-      display: inline;
-      vertical-align: middle;
-    }
-    .card-doc-tag {
-      font-size: 12px;
-      font-weight: 600;
-      color: #3b82f6;
-      margin-top: 3px;
-    }
-
-    .finance-grid {
-      display: grid;
-      grid-template-columns: 1.1fr 1fr 1.1fr;
-      gap: 6px;
-      background: #f8fafc;
-      border: 1px solid #eef2f6;
-      border-radius: 9px;
-      padding: 9px 10px;
-      margin: 8px 0 6px;
-    }
-    .fin-col { display: flex; flex-direction: column; }
-    .fin-label { font-size: 10px; text-transform: uppercase; font-weight: 700; color: var(--text-muted); margin-bottom: 2px; }
-    .fin-amount { font-size: 14px; font-weight: 800; line-height: 1.2; }
-    .fin-amount.total { color: var(--text-main); }
-    .fin-amount.paid { color: var(--success); }
-    .fin-amount.remain { color: var(--danger); }
-    .fin-amount.zero { color: #64748b; }
-
-    .pay-progress-bar {
-      height: 4px;
-      background: #e2e8f0;
-      border-radius: 999px;
-      overflow: hidden;
-      margin-bottom: 6px;
-    }
-    .pay-progress-fill {
-      height: 100%;
-      background: var(--success);
-      border-radius: 999px;
-    }
-
-    .card-footer-hint {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      font-size: 11px;
-      color: var(--text-muted);
-    }
-    .pay-percent-text { font-weight: 600; }
-    .open-hint-text {
-      color: var(--primary-light);
-      font-weight: 700;
-      display: flex;
-      align-items: center;
-      gap: 3px;
-    }
-    .smr-card[open] .open-hint-text .arrow {
-      transform: rotate(180deg);
-    }
-    .arrow {
-      display: inline-block;
-      transition: transform 0.2s ease;
-      font-size: 9px;
-    }
-
-    .card-body {
-      background: #ffffff;
-      border-top: 1px dashed var(--border);
-      padding: 12px 14px 14px;
-      font-size: 12.5px;
-    }
-
-    .detail-section {
-      background: #f8fafc;
-      border: 1px solid var(--border);
-      border-radius: 9px;
-      padding: 10px 12px;
-      margin-bottom: 10px;
-    }
-    .detail-title {
-      font-size: 10.5px;
-      font-weight: 700;
-      text-transform: uppercase;
-      color: var(--accent);
-      margin-bottom: 4px;
-      letter-spacing: 0.3px;
-      display: flex;
-      align-items: center;
-      gap: 5px;
-    }
-    .detail-text {
-      color: #334155;
-      font-size: 12.5px;
-      line-height: 1.4;
-    }
-    .detail-text strong { color: var(--text-main); }
-
-    .cost-box-simple {
-      background: #ffffff;
-      border: 1px solid var(--border);
-      border-radius: 8px;
-      padding: 8px 10px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 10px;
-    }
-    .cost-box-lbl { font-size: 11px; color: var(--text-muted); font-weight: 600; text-transform: uppercase; }
-    .cost-box-val { font-size: 13.5px; font-weight: 800; color: var(--text-main); }
-
-    .status-bottom-bar {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      background: #f1f5f9;
-      padding: 6px 10px;
-      border-radius: 7px;
-      margin-bottom: 10px;
-      font-size: 11.5px;
-    }
-    .status-lbl { color: var(--text-muted); font-weight: 600; }
-    .status-val-pill {
-      font-weight: 700;
-      padding: 2px 7px;
-      border-radius: 999px;
-      font-size: 11px;
-    }
-    .status-val-pill.done { background: #dcfce7; color: #166534; }
-    .status-val-pill.kp { background: #fef3c7; color: #92400e; }
-    .status-val-pill.prod { background: #dbeafe; color: #1e40af; }
-
-    #pin-overlay {
-      position: fixed;
-      top: 0; left: 0; width: 100%; height: 100%;
-      background: #0f172a;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      z-index: 99999;
-      padding: 24px;
-    }
-    .pin-box {
-      background: #1e293b;
-      border: 1px solid #334155;
-      border-radius: 20px;
-      padding: 28px 24px;
-      width: 100%;
-      max-width: 320px;
+    .pin-input {
+      letter-spacing: 0.5em;
       text-align: center;
-      box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.5);
-    }
-    .pin-logo { font-size: 26px; margin-bottom: 8px; }
-    .pin-title { color: #ffffff; font-size: 18px; font-weight: 800; margin-bottom: 4px; }
-    .pin-subtitle { color: #94a3b8; font-size: 13px; margin-bottom: 20px; }
-    .pin-dots { display: flex; justify-content: center; gap: 14px; margin-bottom: 24px; }
-    .pin-dot {
-      width: 16px; height: 16px; border-radius: 50%;
-      border: 2px solid #64748b; background: transparent; transition: all 0.2s ease;
-    }
-    .pin-dot.filled { background: #38bdf8; border-color: #38bdf8; box-shadow: 0 0 10px rgba(56, 189, 248, 0.6); }
-    .pin-numpad { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
-    .pin-btn {
-      background: #334155; color: #ffffff; border: none; border-radius: 14px;
-      font-size: 22px; font-weight: 700; padding: 14px 0; cursor: pointer;
-      user-select: none; transition: background 0.15s ease, transform 0.1s ease;
-    }
-    .pin-btn:active { background: #475569; transform: scale(0.96); }
-    .pin-btn.fn { background: transparent; color: #94a3b8; font-size: 15px; font-weight: 600; }
-    .pin-error-text { color: #f87171; font-size: 13px; font-weight: 600; margin-top: 14px; min-height: 18px; }
-    .shake { animation: shake 0.4s ease-in-out; }
-    @keyframes shake {
-      0%, 100% { transform: translateX(0); }
-      20%, 60% { transform: translateX(-8px); }
-      40%, 80% { transform: translateX(8px); }
+      font-family: monospace;
     }
   </style>
 </head>
-<body>
-  <div id="pin-overlay">
-    <div class="pin-box" id="pinBox">
-      <div class="pin-logo">🔒</div>
-      <div class="pin-title">СК «Сириус»</div>
-      <div class="pin-subtitle">Введите PIN-код доступа</div>
-      <div class="pin-dots">
-        <div class="pin-dot" id="dot0"></div>
-        <div class="pin-dot" id="dot1"></div>
-        <div class="pin-dot" id="dot2"></div>
-        <div class="pin-dot" id="dot3"></div>
+<body class="p-3 sm:p-6 pb-20">
+
+  <!-- ==================== PIN SCREEN ==================== -->
+  <div id="pin-screen" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-sirius-dark/95 backdrop-blur-xl">
+    <div class="w-full max-w-sm glass-card rounded-3xl p-6 sm:p-8 gold-border text-center shadow-2xl relative overflow-hidden">
+      <div class="w-16 h-16 mx-auto mb-4 rounded-2xl bg-sirius-surface border border-sirius-gold/40 flex items-center justify-center text-sirius-gold text-2xl shadow-lg">
+        🔒
       </div>
-      <div class="pin-numpad">
-        <button type="button" class="pin-btn" onclick="pressKey('1')">1</button>
-        <button type="button" class="pin-btn" onclick="pressKey('2')">2</button>
-        <button type="button" class="pin-btn" onclick="pressKey('3')">3</button>
-        <button type="button" class="pin-btn" onclick="pressKey('4')">4</button>
-        <button type="button" class="pin-btn" onclick="pressKey('5')">5</button>
-        <button type="button" class="pin-btn" onclick="pressKey('6')">6</button>
-        <button type="button" class="pin-btn" onclick="pressKey('7')">7</button>
-        <button type="button" class="pin-btn" onclick="pressKey('8')">8</button>
-        <button type="button" class="pin-btn" onclick="pressKey('9')">9</button>
-        <button type="button" class="pin-btn fn" onclick="clearPin()">Сброс</button>
-        <button type="button" class="pin-btn" onclick="pressKey('0')">0</button>
-        <button type="button" class="pin-btn fn" onclick="backspacePin()">⌫</button>
+      <div class="font-title font-extrabold text-white text-xl tracking-wider uppercase mb-1">
+        СК <span class="text-sirius-gold">СИРИУС</span>
       </div>
-      <div class="pin-error-text" id="pinError"></div>
+      <p class="text-xs text-slate-400 mb-6 uppercase tracking-wider font-semibold">Финансовая ведомость объектов</p>
+
+      <form id="pin-form" onsubmit="submitPin(event)" class="space-y-4">
+        <div>
+          <input 
+            type="password" 
+            id="pin-input" 
+            maxlength="4" 
+            inputmode="numeric" 
+            pattern="[0-9]*" 
+            placeholder="••••" 
+            autofocus
+            class="w-full py-4 text-3xl font-bold bg-slate-900/90 border border-slate-700 focus:border-sirius-gold rounded-2xl text-sirius-gold pin-input outline-none transition-all shadow-inner"
+          />
+        </div>
+        <div id="pin-error" class="text-xs text-rose-400 font-medium hidden">Неверный PIN-код доступа</div>
+        <button 
+          type="submit" 
+          id="pin-btn"
+          class="w-full py-3.5 rounded-xl bg-gradient-to-r from-amber-500 via-sirius-gold to-yellow-600 text-slate-950 font-title font-bold text-xs uppercase tracking-wider hover:brightness-110 transition-all shadow-lg shadow-amber-500/20 cursor-pointer">
+          Войти в дашборд
+        </button>
+      </form>
+      <div class="mt-6 text-[10px] text-slate-500">
+        Защищено Zero-Knowledge Cloudflare D1 (SiriusBase)
+      </div>
     </div>
   </div>
 
-  <div class="container" id="mainContent" style="display: none;">
-    <header>
-      <div class="header-top">
-        <span class="badge-header">СК «Сириус»</span>
-        <div class="header-dates">
-          <div class="header-date-row"><span class="date-label">Последнее обновление:</span> <span class="date-val">29.10.2026</span></div>
-          <div class="header-date-row"><span class="date-label">Последняя сверка баланса:</span> <span class="date-val">29.10.2026</span></div>
+  <!-- ==================== DASHBOARD CONTENT ==================== -->
+  <div id="dashboard" class="max-w-4xl mx-auto hidden">
+
+    <!-- HEADER -->
+    <header class="glass-card rounded-2xl p-5 sm:p-6 mb-6 border border-white/10 relative overflow-hidden shadow-2xl">
+      <div class="absolute -right-10 -top-10 w-40 h-40 bg-sirius-gold/10 rounded-full blur-3xl pointer-events-none"></div>
+      <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+        <div>
+          <div class="flex items-center gap-2 mb-1.5">
+            <span class="w-2.5 h-2.5 rounded-full bg-emerald-400 animate-pulse"></span>
+            <span class="text-[11px] font-semibold text-sirius-gold uppercase tracking-wider">Облачная база SiriusBase 24/7</span>
+          </div>
+          <h1 class="text-xl sm:text-2xl font-title font-extrabold text-white tracking-wide">
+            СК <span class="text-sirius-gold">СИРИУС</span> &mdash; ВЕДОМОСТЬ ОБЪЕКТОВ
+          </h1>
+          <p class="text-xs text-slate-400 mt-1">
+            Синхронизировано с Контур.Эльбой и Telegram-ботом заказов
+          </p>
+        </div>
+        <div class="flex items-center gap-2 self-start sm:self-auto">
+          <button 
+            onclick="loadData()" 
+            class="px-3.5 py-2 rounded-xl bg-sirius-surface hover:bg-slate-700 text-white border border-white/10 text-xs font-semibold flex items-center gap-1.5 transition-all cursor-pointer">
+            <span id="refresh-icon">🔄</span>
+            <span>Обновить</span>
+          </button>
+          <button 
+            onclick="logout()" 
+            class="p-2 rounded-xl bg-slate-900 hover:bg-slate-800 text-slate-400 hover:text-white border border-white/10 text-xs transition-all cursor-pointer" 
+            title="Выйти">
+            🔒
+          </button>
         </div>
       </div>
-      <h1>Ведомость объектов и оплат</h1>
-      <p>Юрлица, особенности объектов, счета, оплаты и остатки</p>
     </header>
 
-    <div class="finance-grid">
-      <div class="finance-card">
-        <div class="finance-label">Сумма портфеля (счета / договоры)</div>
-        <div class="finance-value">1 729 450 ₽</div>
-        <div class="finance-sub">по счетам (без КП на 757 800 ₽)</div>
+    <!-- KPI STATS -->
+    <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 mb-6">
+      <div class="glass-card rounded-2xl p-4 border border-white/10">
+        <div class="text-[11px] uppercase tracking-wider text-slate-400 font-semibold mb-1">Общий портфель счетов</div>
+        <div id="stat-total" class="text-xl sm:text-2xl font-title font-extrabold text-white">0 ₽</div>
+        <div id="stat-count" class="text-[11px] text-slate-500 mt-1">Всего: 0 счетов</div>
       </div>
-      <div class="finance-card success">
-        <div class="finance-label">Поступило оплат</div>
-        <div class="finance-value success">791 145 ₽</div>
-        <div class="finance-sub success">45,7% фактически оплачено</div>
+      <div class="glass-card rounded-2xl p-4 border border-emerald-500/20 bg-emerald-950/20">
+        <div class="text-[11px] uppercase tracking-wider text-emerald-400 font-semibold mb-1">Поступило оплат</div>
+        <div id="stat-paid" class="text-xl sm:text-2xl font-title font-extrabold text-emerald-300">0 ₽</div>
+        <div id="stat-paid-pct" class="text-[11px] text-emerald-400/80 mt-1">0% от суммы счетов</div>
       </div>
-      <div class="finance-card warning">
-        <div class="finance-label">Остаток к получению</div>
-        <div class="finance-value warning">938 305 ₽</div>
-        <div class="finance-sub warning">54,3% дебиторская задолженность</div>
+      <div class="glass-card rounded-2xl p-4 border border-amber-500/20 bg-amber-950/20">
+        <div class="text-[11px] uppercase tracking-wider text-amber-400 font-semibold mb-1">Остаток к получению</div>
+        <div id="stat-debt" class="text-xl sm:text-2xl font-title font-extrabold text-amber-300">0 ₽</div>
+        <div id="stat-debt-pct" class="text-[11px] text-amber-400/80 mt-1">0% дебиторская задолженность</div>
       </div>
     </div>
 
-    <div class="toolbar">
-      <div class="toolbar-title">Объекты компании (15)</div>
-      <button type="button" class="toggle-all-btn" onclick="toggleAllCards()">Раскрыть / Свернуть все</button>
+    <!-- CONTROLS: SEARCH & FILTERS -->
+    <div class="glass-card rounded-2xl p-4 mb-6 border border-white/10 flex flex-col sm:flex-row gap-3 items-center justify-between">
+      <div class="w-full sm:w-72 relative">
+        <input 
+          type="text" 
+          id="search-input" 
+          oninput="applyFilters()" 
+          placeholder="Поиск по заказчику или адресу..." 
+          class="w-full bg-slate-900 border border-slate-700 rounded-xl px-3.5 py-2.5 text-xs text-white placeholder-slate-500 focus:border-sirius-gold outline-none transition-all"
+        />
+      </div>
+      <div class="flex items-center gap-1.5 overflow-x-auto w-full sm:w-auto pb-1 sm:pb-0 text-xs">
+        <button onclick="setFilter('all')" id="flt-all" class="px-3 py-1.5 rounded-lg font-semibold transition-all bg-sirius-gold text-slate-950">Все</button>
+        <button onclick="setFilter('unpaid')" id="flt-unpaid" class="px-3 py-1.5 rounded-lg font-semibold transition-all bg-slate-800 text-slate-300 hover:text-white">Ожидают</button>
+        <button onclick="setFilter('part')" id="flt-part" class="px-3 py-1.5 rounded-lg font-semibold transition-all bg-slate-800 text-slate-300 hover:text-white">Аванс</button>
+        <button onclick="setFilter('paid')" id="flt-paid" class="px-3 py-1.5 rounded-lg font-semibold transition-all bg-slate-800 text-slate-300 hover:text-white">Оплачено</button>
+      </div>
     </div>
 
-    <div class="cards-list">
-<details class="smr-card">
-        <summary class="card-summary">
-          <div class="card-org-line">
-            <span class="card-number">#1</span>
-            <div class="card-org-name">ООО «СПЕЛЕОСТРОЙ»:</div>
-            <div class="card-feature">г. Красноярск, Аэропорт</div>
-            <div class="card-doc-tag">счёт № 95 от 19.10.2026</div>
-          </div>
-          <div class="finance-grid">
-            <div class="fin-col">
-              <span class="fin-label">К оплате</span>
-              <span class="fin-amount total">79 000 ₽</span>
-            </div>
-            <div class="fin-col">
-              <span class="fin-label">Оплачено</span>
-              <span class="fin-amount zero">0 ₽</span>
-            </div>
-            <div class="fin-col">
-              <span class="fin-label">Остаток</span>
-              <span class="fin-amount remain">79 000 ₽</span>
-            </div>
-          </div>
-          <div class="pay-progress-bar">
-            <div class="pay-progress-fill" style="width: 0%;"></div>
-          </div>
-          <div class="card-footer-hint">
-            <span class="pay-percent-text">⚪ Ожидает оплаты</span>
-            <span class="open-hint-text">Подробнее <span class="arrow">&#9660;</span></span>
-          </div>
-        </summary>
-        <div class="card-body">
-          <div class="detail-section">
-            <div class="detail-title">&#128205; Краткое описание объекта</div>
-            <div class="detail-text">
-              <strong>г. Красноярск, Аэропорт:</strong> Поручни пандуса с калёным стеклом 8 мм и двойным поручнем Ø42 мм, AISI 201 (2 шт. по 2,30 м = 4,60 м.п.)
-            </div>
-          </div>
-          <div class="status-bottom-bar">
-            <span class="status-lbl">Статус выполнения:</span>
-            <span class="status-val-pill prod">🟡 Отправлено КП / счёт</span>
-          </div>
-        </div>
-      </details>
-
-<details class="smr-card">
-        <summary class="card-summary">
-          <div class="card-org-line">
-            <span class="card-number">#2</span>
-            <div class="card-org-name">ООО «Районная Компания»:</div>
-            <div class="card-feature">г. Красноярск, ул. Юшкова, д. 38А, п. 1</div>
-            <div class="card-doc-tag">счёт № 94 от 07.10.2026</div>
-          </div>
-          <div class="finance-grid">
-            <div class="fin-col">
-              <span class="fin-label">К оплате</span>
-              <span class="fin-amount total">10 100 ₽</span>
-            </div>
-            <div class="fin-col">
-              <span class="fin-label">Оплачено</span>
-              <span class="fin-amount paid">10 100 ₽</span>
-            </div>
-            <div class="fin-col">
-              <span class="fin-label">Остаток</span>
-              <span class="fin-amount zero">0 ₽</span>
-            </div>
-          </div>
-          <div class="pay-progress-bar">
-            <div class="pay-progress-fill" style="width: 100%;"></div>
-          </div>
-          <div class="card-footer-hint">
-            <span class="pay-percent-text">🟢 100% Оплачено</span>
-            <span class="open-hint-text">Подробнее <span class="arrow">&#9660;</span></span>
-          </div>
-        </summary>
-        <div class="card-body">
-          <div class="detail-section">
-            <div class="detail-title">&#128205; Краткое описание объекта</div>
-            <div class="detail-text">
-              <strong>г. Красноярск, ул. Юшкова, д. 38А, п. 1:</strong> Поручень пристенный прямой из нержавеющей стали AISI 304 L=2800 мм (2,80 м.п., 1 шт.)
-            </div>
-          </div>
-          <div class="status-bottom-bar">
-            <span class="status-lbl">Статус выполнения:</span>
-            <span class="status-val-pill done">🔵 Заказаны материалы</span>
-          </div>
-        </div>
-      </details>
-
-<details class="smr-card">
-        <summary class="card-summary">
-          <div class="card-org-line">
-            <span class="card-number">#3</span>
-            <div class="card-org-name">ИП Гасанов Э.Ч.:</div>
-            <div class="card-feature">с. Шалинское, входная группа</div>
-            <div class="card-doc-tag">счёт № 92 от 05.10.2026</div>
-          </div>
-          <div class="finance-grid">
-            <div class="fin-col">
-              <span class="fin-label">К оплате</span>
-              <span class="fin-amount total">119 000 ₽</span>
-            </div>
-            <div class="fin-col">
-              <span class="fin-label">Оплачено</span>
-              <span class="fin-amount paid">119 000 ₽</span>
-            </div>
-            <div class="fin-col">
-              <span class="fin-label">Остаток</span>
-              <span class="fin-amount zero">0 ₽</span>
-            </div>
-          </div>
-          <div class="pay-progress-bar">
-            <div class="pay-progress-fill" style="width: 100%;"></div>
-          </div>
-          <div class="card-footer-hint">
-            <span class="pay-percent-text">🟢 100% Оплачено</span>
-            <span class="open-hint-text">Подробнее <span class="arrow">&#9660;</span></span>
-          </div>
-        </summary>
-        <div class="card-body">
-          <div class="detail-section">
-            <div class="detail-title">&#128205; Краткое описание объекта</div>
-            <div class="detail-text">
-              <strong>с. Шалинское, входная группа:</strong> Ограждения с калиткой «Антипаника» 6,34 м.п. (4 ригеля) + двухуровневые поручни пандуса 4,0 м.п. (всего 10,34 м.п., AISI 201)
-            </div>
-          </div>
-          <div class="status-bottom-bar">
-            <span class="status-lbl">Статус выполнения:</span>
-            <span class="status-val-pill done">🔵 Заказаны материалы</span>
-          </div>
-        </div>
-      </details>
-
-<details class="smr-card">
-        <summary class="card-summary">
-          <div class="card-org-line">
-            <span class="card-number">#4</span>
-            <div class="card-org-name">ООО «СПЕЛЕОСТРОЙ»:</div>
-            <div class="card-feature">г. Красноярск, Аэропорт (терминал)</div>
-            <div class="card-doc-tag">счёт № 91 от 05.10.2026</div>
-          </div>
-          <div class="finance-grid">
-            <div class="fin-col">
-              <span class="fin-label">К оплате</span>
-              <span class="fin-amount total">75 900 ₽</span>
-            </div>
-            <div class="fin-col">
-              <span class="fin-label">Оплачено</span>
-              <span class="fin-amount paid">75 900 ₽</span>
-            </div>
-            <div class="fin-col">
-              <span class="fin-label">Остаток</span>
-              <span class="fin-amount zero">0 ₽</span>
-            </div>
-          </div>
-          <div class="pay-progress-bar">
-            <div class="pay-progress-fill" style="width: 100%;"></div>
-          </div>
-          <div class="card-footer-hint">
-            <span class="pay-percent-text">🟢 100% Оплачено<br>(53 000 ₽ + 22 900 ₽)</span>
-            <span class="open-hint-text">Подробнее <span class="arrow">&#9660;</span></span>
-          </div>
-        </summary>
-        <div class="card-body">
-          <div class="detail-section">
-            <div class="detail-title">&#128205; Краткое описание объекта</div>
-            <div class="detail-text">
-              <strong>г. Красноярск, Аэропорт (терминал):</strong> Напольные колесоотбойники Ø50,8 мм: прямая секция 5,4 м + угловая секция с поворотом 90° 8,4 м (всего 13,8 м.п.)
-            </div>
-          </div>
-          <div class="status-bottom-bar">
-            <span class="status-lbl">Статус выполнения:</span>
-            <span class="status-val-pill done">🟢 Объект выполнен</span>
-          </div>
-        </div>
-      </details>
-
-<details class="smr-card">
-        <summary class="card-summary">
-          <div class="card-org-line">
-            <span class="card-number">#5</span>
-            <div class="card-org-name">ООО «ТрансЖелДорПроект»:</div>
-            <div class="card-feature">г. Красноярск, Центральный парк (Учебный корпус ДЖД)</div>
-            <div class="card-doc-tag">КП № 39 от 01.10.2026</div>
-          </div>
-          <div class="finance-grid">
-            <div class="fin-col">
-              <span class="fin-label">К оплате</span>
-              <span class="fin-amount total">757 800 ₽<br>(по КП)</span>
-            </div>
-            <div class="fin-col">
-              <span class="fin-label">Оплачено</span>
-              <span class="fin-amount zero">0 ₽</span>
-            </div>
-            <div class="fin-col">
-              <span class="fin-label">Остаток</span>
-              <span class="fin-amount remain">— (в портфель после счёта)</span>
-            </div>
-          </div>
-          <div class="pay-progress-bar">
-            <div class="pay-progress-fill" style="width: 0%;"></div>
-          </div>
-          <div class="card-footer-hint">
-            <span class="pay-percent-text">⚪ На согласовании КП</span>
-            <span class="open-hint-text">Подробнее <span class="arrow">&#9660;</span></span>
-          </div>
-        </summary>
-        <div class="card-body">
-          <div class="detail-section">
-            <div class="detail-title">&#128205; Краткое описание объекта</div>
-            <div class="detail-text">
-              <strong>г. Красноярск, Центральный парк (Учебный корпус ДЖД):</strong> Комплекс ограждений 80,54 м.п.: марши с ригелями, пристенные поручни Ø42,4 мм, атриумы с частоколом, уличный пандус МГН AISI 304
-            </div>
-          </div>
-          <div class="status-bottom-bar">
-            <span class="status-lbl">Статус выполнения:</span>
-            <span class="status-val-pill prod">🟡 Отправлено КП / счёт</span>
-          </div>
-        </div>
-      </details>
-
-<details class="smr-card">
-        <summary class="card-summary">
-          <div class="card-org-line">
-            <span class="card-number">#6</span>
-            <div class="card-org-name">ИП Сенькова Ю.Ю.:</div>
-            <div class="card-feature">г. Зеленогорск, ул. Комсомольская, д. 23Ж</div>
-            <div class="card-doc-tag">счёт № 87 от 28.09.2026</div>
-          </div>
-          <div class="finance-grid">
-            <div class="fin-col">
-              <span class="fin-label">К оплате</span>
-              <span class="fin-amount total">180 100 ₽</span>
-            </div>
-            <div class="fin-col">
-              <span class="fin-label">Оплачено</span>
-              <span class="fin-amount paid">180 100 ₽</span>
-            </div>
-            <div class="fin-col">
-              <span class="fin-label">Остаток</span>
-              <span class="fin-amount zero">0 ₽</span>
-            </div>
-          </div>
-          <div class="pay-progress-bar">
-            <div class="pay-progress-fill" style="width: 100%;"></div>
-          </div>
-          <div class="card-footer-hint">
-            <span class="pay-percent-text">🟢 100% Оплачено<br>(плат. ИП Парфилов Е.С.)</span>
-            <span class="open-hint-text">Подробнее <span class="arrow">&#9660;</span></span>
-          </div>
-        </summary>
-        <div class="card-body">
-          <div class="detail-section">
-            <div class="detail-title">&#128205; Краткое описание объекта</div>
-            <div class="detail-text">
-              <strong>г. Зеленогорск, ул. Комсомольская, д. 23Ж:</strong> Лестничные ограждения H=1200 мм: 2 секции с тройным поручнем Ø50,8 мм + 1 секция с пятерным поручнем Ø50,8 мм (9,0 м.п.)
-            </div>
-          </div>
-          <div class="status-bottom-bar">
-            <span class="status-lbl">Статус выполнения:</span>
-            <span class="status-val-pill done">🔵 Заказаны материалы</span>
-          </div>
-        </div>
-      </details>
-
-<details class="smr-card">
-        <summary class="card-summary">
-          <div class="card-org-line">
-            <span class="card-number">#7</span>
-            <div class="card-org-name">ИП Шамрай А.Л.:</div>
-            <div class="card-feature">г. Красноярск</div>
-            <div class="card-doc-tag">счёт № 86 от 25.09.2026</div>
-          </div>
-          <div class="finance-grid">
-            <div class="fin-col">
-              <span class="fin-label">К оплате</span>
-              <span class="fin-amount total">32 300 ₽</span>
-            </div>
-            <div class="fin-col">
-              <span class="fin-label">Оплачено</span>
-              <span class="fin-amount paid">32 300 ₽</span>
-            </div>
-            <div class="fin-col">
-              <span class="fin-label">Остаток</span>
-              <span class="fin-amount zero">0 ₽</span>
-            </div>
-          </div>
-          <div class="pay-progress-bar">
-            <div class="pay-progress-fill" style="width: 100%;"></div>
-          </div>
-          <div class="card-footer-hint">
-            <span class="pay-percent-text">🟢 100% Оплачено</span>
-            <span class="open-hint-text">Подробнее <span class="arrow">&#9660;</span></span>
-          </div>
-        </summary>
-        <div class="card-body">
-          <div class="detail-section">
-            <div class="detail-title">&#128205; Краткое описание объекта</div>
-            <div class="detail-text">
-              <strong>г. Красноярск:</strong> Изготовление и монтаж лестничного ограждения из нержавеющей стали L=3800 мм, H=1200 мм (1 шт.)
-            </div>
-          </div>
-          <div class="status-bottom-bar">
-            <span class="status-lbl">Статус выполнения:</span>
-            <span class="status-val-pill done">🟢 Объект выполнен</span>
-          </div>
-        </div>
-      </details>
-
-<details class="smr-card">
-        <summary class="card-summary">
-          <div class="card-org-line">
-            <span class="card-number">#8</span>
-            <div class="card-org-name">ООО «Легранд 88»:</div>
-            <div class="card-feature">г. Зеленогорск, ул. Комсомольская, д. 23Ж (КБ № 42)</div>
-            <div class="card-doc-tag">счёт № 84 от 17.09.2026</div>
-          </div>
-          <div class="finance-grid">
-            <div class="fin-col">
-              <span class="fin-label">К оплате</span>
-              <span class="fin-amount total">78 000 ₽</span>
-            </div>
-            <div class="fin-col">
-              <span class="fin-label">Оплачено</span>
-              <span class="fin-amount zero">0 ₽</span>
-            </div>
-            <div class="fin-col">
-              <span class="fin-label">Остаток</span>
-              <span class="fin-amount remain">78 000 ₽</span>
-            </div>
-          </div>
-          <div class="pay-progress-bar">
-            <div class="pay-progress-fill" style="width: 0%;"></div>
-          </div>
-          <div class="card-footer-hint">
-            <span class="pay-percent-text">⚪ Ожидает оплаты</span>
-            <span class="open-hint-text">Подробнее <span class="arrow">&#9660;</span></span>
-          </div>
-        </summary>
-        <div class="card-body">
-          <div class="detail-section">
-            <div class="detail-title">&#128205; Краткое описание объекта</div>
-            <div class="detail-text">
-              <strong>г. Зеленогорск, ул. Комсомольская, д. 23Ж (КБ № 42):</strong> Наружные уличные ограждения крыльца взрослого отделения из AISI 304 (6,8 м.п., стойки Ø42,4 мм, 3 ригеля Ø16 мм)
-            </div>
-          </div>
-          <div class="status-bottom-bar">
-            <span class="status-lbl">Статус выполнения:</span>
-            <span class="status-val-pill prod">🟡 Отправлено КП / счёт</span>
-          </div>
-        </div>
-      </details>
-
-<details class="smr-card">
-        <summary class="card-summary">
-          <div class="card-org-line">
-            <span class="card-number">#9</span>
-            <div class="card-org-name">ООО «СПЕКТР»:</div>
-            <div class="card-feature">г. Красноярск</div>
-            <div class="card-doc-tag">счёт № 82 от 14.09.2026</div>
-          </div>
-          <div class="finance-grid">
-            <div class="fin-col">
-              <span class="fin-label">К оплате</span>
-              <span class="fin-amount total">29 700 ₽</span>
-            </div>
-            <div class="fin-col">
-              <span class="fin-label">Оплачено</span>
-              <span class="fin-amount paid">16 000 ₽</span>
-            </div>
-            <div class="fin-col">
-              <span class="fin-label">Остаток</span>
-              <span class="fin-amount remain">13 700 ₽</span>
-            </div>
-          </div>
-          <div class="pay-progress-bar">
-            <div class="pay-progress-fill" style="width: 54%;"></div>
-          </div>
-          <div class="card-footer-hint">
-            <span class="pay-percent-text">🟡 Аванс 53,9%</span>
-            <span class="open-hint-text">Подробнее <span class="arrow">&#9660;</span></span>
-          </div>
-        </summary>
-        <div class="card-body">
-          <div class="detail-section">
-            <div class="detail-title">&#128205; Краткое описание объекта</div>
-            <div class="detail-text">
-              <strong>г. Красноярск:</strong> Ограждения лестницы крыльца входной группы: поручень H=900 мм, 3 ригеля Ø16 мм, труба Ø42,4 мм, AISI 304 (3,0 м.п.)
-            </div>
-          </div>
-          <div class="status-bottom-bar">
-            <span class="status-lbl">Статус выполнения:</span>
-            <span class="status-val-pill prod">🟡 Отправлено КП / счёт</span>
-          </div>
-        </div>
-      </details>
-
-<details class="smr-card">
-        <summary class="card-summary">
-          <div class="card-org-line">
-            <span class="card-number">#10</span>
-            <div class="card-org-name">ИП Шамрай А.Л.:</div>
-            <div class="card-feature">г. Красноярск, ул. Коломенская, д. 4а (Ленинский суд)</div>
-            <div class="card-doc-tag">счёт № 81 от 05.09.2026</div>
-          </div>
-          <div class="finance-grid">
-            <div class="fin-col">
-              <span class="fin-label">К оплате</span>
-              <span class="fin-amount total">264 000 ₽</span>
-            </div>
-            <div class="fin-col">
-              <span class="fin-label">Оплачено</span>
-              <span class="fin-amount paid">79 000 ₽</span>
-            </div>
-            <div class="fin-col">
-              <span class="fin-label">Остаток</span>
-              <span class="fin-amount remain">185 000 ₽</span>
-            </div>
-          </div>
-          <div class="pay-progress-bar">
-            <div class="pay-progress-fill" style="width: 30%;"></div>
-          </div>
-          <div class="card-footer-hint">
-            <span class="pay-percent-text">🟡 Аванс 29,9%</span>
-            <span class="open-hint-text">Подробнее <span class="arrow">&#9660;</span></span>
-          </div>
-        </summary>
-        <div class="card-body">
-          <div class="detail-section">
-            <div class="detail-title">&#128205; Краткое описание объекта</div>
-            <div class="detail-text">
-              <strong>г. Красноярск, ул. Коломенская, д. 4а (Ленинский суд):</strong> Лестничные ограждения H=1200 мм (10,8 м.п.) + двухуровневые поручни пандуса H=900/700 мм (22,0 м.п.), AISI 304
-            </div>
-          </div>
-          <div class="status-bottom-bar">
-            <span class="status-lbl">Статус выполнения:</span>
-            <span class="status-val-pill prod">🟡 Отправлено КП / счёт</span>
-          </div>
-        </div>
-      </details>
-
-<details class="smr-card">
-        <summary class="card-summary">
-          <div class="card-org-line">
-            <span class="card-number">#11</span>
-            <div class="card-org-name">ООО «Спринт» / ООО «Мастер строй»:</div>
-            <div class="card-feature">г. Красноярск</div>
-            <div class="card-doc-tag">счёт № 79 от 02.09.2026</div>
-          </div>
-          <div class="finance-grid">
-            <div class="fin-col">
-              <span class="fin-label">К оплате</span>
-              <span class="fin-amount total">65 200 ₽</span>
-            </div>
-            <div class="fin-col">
-              <span class="fin-label">Оплачено</span>
-              <span class="fin-amount paid">65 200 ₽</span>
-            </div>
-            <div class="fin-col">
-              <span class="fin-label">Остаток</span>
-              <span class="fin-amount zero">0 ₽</span>
-            </div>
-          </div>
-          <div class="pay-progress-bar">
-            <div class="pay-progress-fill" style="width: 100%;"></div>
-          </div>
-          <div class="card-footer-hint">
-            <span class="pay-percent-text">🟢 100% Оплачено</span>
-            <span class="open-hint-text">Подробнее <span class="arrow">&#9660;</span></span>
-          </div>
-        </summary>
-        <div class="card-body">
-          <div class="detail-section">
-            <div class="detail-title">&#128205; Краткое описание объекта</div>
-            <div class="detail-text">
-              <strong>г. Красноярск:</strong> Изготовление и монтаж серии прямых колесоотбойников: 8 шт. \times 650 мм и 4 шт. \times 2300 мм (12 шт., 14,4 м.п.)
-            </div>
-          </div>
-          <div class="status-bottom-bar">
-            <span class="status-lbl">Статус выполнения:</span>
-            <span class="status-val-pill done">🟢 Объект выполнен</span>
-          </div>
-        </div>
-      </details>
-
-<details class="smr-card">
-        <summary class="card-summary">
-          <div class="card-org-line">
-            <span class="card-number">#12</span>
-            <div class="card-org-name">ООО «СПЕКТР»:</div>
-            <div class="card-feature">г. Красноярск</div>
-            <div class="card-doc-tag">счёт № 53 от 20.08.2026</div>
-          </div>
-          <div class="finance-grid">
-            <div class="fin-col">
-              <span class="fin-label">К оплате</span>
-              <span class="fin-amount total">550 150 ₽</span>
-            </div>
-            <div class="fin-col">
-              <span class="fin-label">Оплачено</span>
-              <span class="fin-amount paid">165 045 ₽</span>
-            </div>
-            <div class="fin-col">
-              <span class="fin-label">Остаток</span>
-              <span class="fin-amount remain">385 105 ₽</span>
-            </div>
-          </div>
-          <div class="pay-progress-bar">
-            <div class="pay-progress-fill" style="width: 30%;"></div>
-          </div>
-          <div class="card-footer-hint">
-            <span class="pay-percent-text">🟡 Аванс 30,0%</span>
-            <span class="open-hint-text">Подробнее <span class="arrow">&#9660;</span></span>
-          </div>
-        </summary>
-        <div class="card-body">
-          <div class="detail-section">
-            <div class="detail-title">&#128205; Краткое описание объекта</div>
-            <div class="detail-text">
-              <strong>г. Красноярск:</strong> Поручни пандуса (49 м.п., 2 ригеля) + поручни лестницы крыльца (16,5 м.п., 3 ригеля), AISI 304, всего 65,5 м.п.
-            </div>
-          </div>
-          <div class="status-bottom-bar">
-            <span class="status-lbl">Статус выполнения:</span>
-            <span class="status-val-pill prod">🟡 Отправлено КП / счёт</span>
-          </div>
-        </div>
-      </details>
-
-<details class="smr-card">
-        <summary class="card-summary">
-          <div class="card-org-line">
-            <span class="card-number">#13</span>
-            <div class="card-org-name">КГБУ СО «Пансионат "Ветеран"»:</div>
-            <div class="card-feature">г. Красноярск, ул. Елены Стасовой, д. 28</div>
-            <div class="card-doc-tag">контракт № 86/07.26 от 29.07.2026</div>
-          </div>
-          <div class="finance-grid">
-            <div class="fin-col">
-              <span class="fin-label">К оплате</span>
-              <span class="fin-amount total">48 500 ₽</span>
-            </div>
-            <div class="fin-col">
-              <span class="fin-label">Оплачено</span>
-              <span class="fin-amount paid">48 500 ₽</span>
-            </div>
-            <div class="fin-col">
-              <span class="fin-label">Остаток</span>
-              <span class="fin-amount zero">0 ₽</span>
-            </div>
-          </div>
-          <div class="pay-progress-bar">
-            <div class="pay-progress-fill" style="width: 100%;"></div>
-          </div>
-          <div class="card-footer-hint">
-            <span class="pay-percent-text">🟢 100% Оплачено<br>(постоплата 223-ФЗ)</span>
-            <span class="open-hint-text">Подробнее <span class="arrow">&#9660;</span></span>
-          </div>
-        </summary>
-        <div class="card-body">
-          <div class="detail-section">
-            <div class="detail-title">&#128205; Краткое описание объекта</div>
-            <div class="detail-text">
-              <strong>г. Красноярск, ул. Елены Стасовой, д. 28:</strong> Откидные настенные консольные поручни для санузлов МГН (800\times 200 мм, сталь AISI 304, 5 шт./комплектов)
-            </div>
-          </div>
-          <div class="status-bottom-bar">
-            <span class="status-lbl">Статус выполнения:</span>
-            <span class="status-val-pill done">🟢 Объект выполнен</span>
-          </div>
-        </div>
-      </details>
-
-<details class="smr-card">
-        <summary class="card-summary">
-          <div class="card-org-line">
-            <span class="card-number">#14</span>
-            <div class="card-org-name">АНО ПО «МК Альянс Лидеров Медицины»:</div>
-            <div class="card-feature">г. Красноярск, ул. Качинская, зд. 20/1</div>
-            <div class="card-doc-tag">счёт № 97 от 29.10.2026</div>
-          </div>
-          <div class="finance-grid">
-            <div class="fin-col">
-              <span class="fin-label">К оплате</span>
-              <span class="fin-amount total">172 000 ₽</span>
-            </div>
-            <div class="fin-col">
-              <span class="fin-label">Оплачено</span>
-              <span class="fin-amount zero">0 ₽</span>
-            </div>
-            <div class="fin-col">
-              <span class="fin-label">Остаток</span>
-              <span class="fin-amount remain">172 000 ₽</span>
-            </div>
-          </div>
-          <div class="pay-progress-bar">
-            <div class="pay-progress-fill" style="width: 0%;"></div>
-          </div>
-          <div class="card-footer-hint">
-            <span class="pay-percent-text">⚪ Ожидает оплаты</span>
-            <span class="open-hint-text">Подробнее <span class="arrow">&#9660;</span></span>
-          </div>
-        </summary>
-        <div class="card-body">
-          <div class="detail-section">
-            <div class="detail-title">&#128205; Краткое описание объекта</div>
-            <div class="detail-text">
-              <strong>г. Красноярск, ул. Качинская, зд. 20/1:</strong> Стационарный металлический пандус L=7000 мм, B=1200 мм, настил ПВЛ 406, поручни H=900/700 мм из проф. трубы 40х40, грунт+краска (1 шт., 7,00 м.п.)
-            </div>
-          </div>
-          <div class="status-bottom-bar">
-            <span class="status-lbl">Статус выполнения:</span>
-            <span class="status-val-pill prod">🟡 Отправлено КП / счёт</span>
-          </div>
-        </div>
-      </details>
-
-<details class="smr-card">
-        <summary class="card-summary">
-          <div class="card-org-line">
-            <span class="card-number">#15</span>
-            <div class="card-org-name">Артель старателей «Ойна»:</div>
-            <div class="card-feature">г. Красноярск, ул. Телевизорная, д. 1, стр. 15</div>
-            <div class="card-doc-tag">счёт № 98 от 29.10.2026</div>
-          </div>
-          <div class="finance-grid">
-            <div class="fin-col">
-              <span class="fin-label">К оплате</span>
-              <span class="fin-amount total">25 500 ₽</span>
-            </div>
-            <div class="fin-col">
-              <span class="fin-label">Оплачено</span>
-              <span class="fin-amount zero">0 ₽</span>
-            </div>
-            <div class="fin-col">
-              <span class="fin-label">Остаток</span>
-              <span class="fin-amount remain">25 500 ₽</span>
-            </div>
-          </div>
-          <div class="pay-progress-bar">
-            <div class="pay-progress-fill" style="width: 0%;"></div>
-          </div>
-          <div class="card-footer-hint">
-            <span class="pay-percent-text">⚪ Ожидает оплаты</span>
-            <span class="open-hint-text">Подробнее <span class="arrow">&#9660;</span></span>
-          </div>
-        </summary>
-        <div class="card-body">
-          <div class="detail-section">
-            <div class="detail-title">&#128205; Краткое описание объекта</div>
-            <div class="detail-text">
-              <strong>г. Красноярск, ул. Телевизорная, д. 1, стр. 15:</strong> Пандус откидной L=2400 мм (аппарели на каркасе, сталь оцинков. 1,5 мм) + столбик фиксации (1 шт., 2,40 м.п.) с доставкой и монтажом
-            </div>
-          </div>
-          <div class="status-bottom-bar">
-            <span class="status-lbl">Статус выполнения:</span>
-            <span class="status-val-pill prod">🟡 Отправлено КП / счёт</span>
-          </div>
-        </div>
-      </details>
+    <!-- CARDS LIST -->
+    <div id="cards-container" class="space-y-3.5">
+      <!-- Loading Skeleton -->
+      <div class="glass-card rounded-2xl p-6 text-center text-slate-400 text-sm">
+        ⏳ Загрузка актуальных данных из базы SiriusBase...
+      </div>
     </div>
+
+    <footer class="mt-8 text-center text-xs text-slate-500 space-y-1">
+      <div>&copy; 2014&ndash;2026 Строительная компания «СК Сириус». Все права защищены.</div>
+      <div class="text-[11px] text-slate-600">Автономная финансовая экосистема PulseCore by SYNAPTIQ Lab</div>
+    </footer>
+
   </div>
 
+  <!-- JAVASCRIPT LOGIC -->
   <script>
-    const CORRECT_PIN = "1235";
-    let enteredPin = "";
-    if (sessionStorage.getItem("sirius_auth") === "true") { unlockPage(); }
-    function updateDots() {
-      for (let i = 0; i < 4; i++) {
-        const dot = document.getElementById("dot" + i);
-        if (i < enteredPin.length) { dot.classList.add("filled"); } else { dot.classList.remove("filled"); }
-      }
-    }
-    function pressKey(num) {
-      if (enteredPin.length < 4) {
-        enteredPin += num; updateDots(); document.getElementById("pinError").innerText = "";
-        if (enteredPin.length === 4) { setTimeout(verifyPin, 100); }
-      }
-    }
-    function clearPin() { enteredPin = ""; updateDots(); document.getElementById("pinError").innerText = ""; }
-    function backspacePin() {
-      if (enteredPin.length > 0) { enteredPin = enteredPin.slice(0, -1); updateDots(); document.getElementById("pinError").innerText = ""; }
-    }
-    function verifyPin() {
-      if (enteredPin === CORRECT_PIN) { sessionStorage.setItem("sirius_auth", "true"); unlockPage(); }
-      else {
-        const box = document.getElementById("pinBox");
-        document.getElementById("pinError").innerText = "Неверный PIN-код!";
-        box.classList.add("shake");
-        setTimeout(() => { box.classList.remove("shake"); clearPin(); }, 500);
-      }
-    }
-    function unlockPage() {
-      document.getElementById("pin-overlay").style.display = "none";
-      document.getElementById("mainContent").style.display = "block";
-    }
-    window.addEventListener("keydown", function(e) {
-      if (document.getElementById("pin-overlay").style.display !== "none") {
-        if (e.key >= "0" && e.key <= "9") { pressKey(e.key); }
-        else if (e.key === "Backspace") { backspacePin(); }
-        else if (e.key === "Escape") { clearPin(); }
+    // URL API воркера
+    const API_URL = 'https://sirius-order-bot.dandeliondnd-vn.workers.dev/api/finance/reestr';
+    let currentPin = '';
+    let allBills = [];
+    let currentFilter = 'all';
+
+    window.addEventListener('DOMContentLoaded', () => {
+      const savedPin = sessionStorage.getItem('sirius_reestr_pin');
+      if (savedPin) {
+        currentPin = savedPin;
+        loadData();
       }
     });
-    function toggleAllCards() {
-      const cards = document.querySelectorAll('.smr-card');
-      const anyOpen = Array.from(cards).some(c => c.open);
-      cards.forEach(c => c.open = !anyOpen);
+
+    async function submitPin(e) {
+      if (e) e.preventDefault();
+      const input = document.getElementById('pin-input');
+      const val = input.value.trim();
+      if (!val) return;
+
+      currentPin = val;
+      const btn = document.getElementById('pin-btn');
+      btn.textContent = 'Проверка...';
+      btn.disabled = true;
+
+      const ok = await loadData();
+      btn.textContent = 'Войти в дашборд';
+      btn.disabled = false;
+
+      if (!ok) {
+        document.getElementById('pin-error').classList.remove('hidden');
+        input.value = '';
+        input.focus();
+      }
+    }
+
+    async function loadData() {
+      const errEl = document.getElementById('pin-error');
+      if (errEl) errEl.classList.add('hidden');
+
+      const refIcon = document.getElementById('refresh-icon');
+      if (refIcon) refIcon.classList.add('animate-spin');
+
+      try {
+        const resp = await fetch(API_URL, {
+          headers: { 'X-Pin': currentPin }
+        });
+
+        if (resp.status === 403 || !resp.ok) {
+          sessionStorage.removeItem('sirius_reestr_pin');
+          return false;
+        }
+
+        const data = await resp.json();
+        if (data.success && data.bills) {
+          sessionStorage.setItem('sirius_reestr_pin', currentPin);
+          allBills = data.bills;
+
+          document.getElementById('pin-screen').classList.add('hidden');
+          document.getElementById('dashboard').classList.remove('hidden');
+
+          renderSummary(data.summary);
+          applyFilters();
+          return true;
+        }
+        return false;
+      } catch (err) {
+        console.error("Load error:", err);
+        return false;
+      } finally {
+        if (refIcon) refIcon.classList.remove('animate-spin');
+      }
+    }
+
+    function renderSummary(s) {
+      if (!s) return;
+      document.getElementById('stat-total').textContent = (s.totalPortfolio || 0).toLocaleString('ru-RU') + ' ₽';
+      document.getElementById('stat-count').textContent = `Всего: ${s.count || 0} счетов`;
+      document.getElementById('stat-paid').textContent = (s.totalPaid || 0).toLocaleString('ru-RU') + ' ₽';
+      document.getElementById('stat-paid-pct').textContent = `${s.paidPct || 0}% от суммы портфеля`;
+      document.getElementById('stat-debt').textContent = (s.totalDebt || 0).toLocaleString('ru-RU') + ' ₽';
+      document.getElementById('stat-debt-pct').textContent = `${s.debtPct || 0}% дебиторская задолженность`;
+    }
+
+    function setFilter(flt) {
+      currentFilter = flt;
+      ['all', 'unpaid', 'part', 'paid'].forEach(k => {
+        const btn = document.getElementById(`flt-${k}`);
+        if (!btn) return;
+        if (k === flt) {
+          btn.className = "px-3 py-1.5 rounded-lg font-semibold transition-all bg-sirius-gold text-slate-950 shadow-md";
+        } else {
+          btn.className = "px-3 py-1.5 rounded-lg font-semibold transition-all bg-slate-800 text-slate-300 hover:text-white";
+        }
+      });
+      applyFilters();
+    }
+
+    function applyFilters() {
+      const q = (document.getElementById('search-input').value || '').toLowerCase().trim();
+      
+      const filtered = allBills.filter(b => {
+        // Поиск
+        const matchQ = !q || 
+          (b.contractor_name || '').toLowerCase().includes(q) || 
+          (b.address || '').toLowerCase().includes(q) || 
+          (b.bill_number || '').toLowerCase().includes(q) ||
+          (b.description || '').toLowerCase().includes(q);
+
+        if (!matchQ) return false;
+
+        // Фильтр статусов
+        const isPaid = (b.pay_status || '').includes('100%') || b.paid >= b.total;
+        const isPart = (b.pay_status || '').includes('Аванс');
+        const isUnpaid = !isPaid && !isPart;
+
+        if (currentFilter === 'paid') return isPaid;
+        if (currentFilter === 'part') return isPart;
+        if (currentFilter === 'unpaid') return isUnpaid;
+
+        return true;
+      });
+
+      renderCards(filtered);
+    }
+
+    function renderCards(bills) {
+      const container = document.getElementById('cards-container');
+      if (!bills || bills.length === 0) {
+        container.innerHTML = `
+          <div class="glass-card rounded-2xl p-8 text-center text-slate-400 text-sm">
+            Ничего не найдено по вашему запросу.
+          </div>
+        `;
+        return;
+      }
+
+      container.innerHTML = bills.map((b, idx) => {
+        const total = Number(b.total) || 0;
+        const paid = Number(b.paid) || 0;
+        const remain = Number(b.remain) || Math.max(0, total - paid);
+        const pct = total > 0 ? Math.min(100, Math.round((paid / total) * 100)) : 0;
+
+        let badgeClass = "bg-slate-800 text-slate-300 border-slate-700";
+        if (pct === 100 || (b.pay_status || '').includes('100%')) {
+          badgeClass = "bg-emerald-950/80 text-emerald-300 border-emerald-500/40";
+        } else if (pct > 0 || (b.pay_status || '').includes('Аванс')) {
+          badgeClass = "bg-amber-950/80 text-amber-300 border-amber-500/40";
+        }
+
+        const dateFormatted = b.bill_date ? b.bill_date.split('-').reverse().join('.') : '';
+
+        return `
+          <div class="glass-card rounded-2xl p-4 sm:p-5 border transition-all duration-300 hover:translate-y-[-1px]">
+            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-2.5">
+              <div class="flex items-center gap-2 flex-wrap">
+                <span class="text-xs font-title font-extrabold text-sirius-gold">
+                  СЧЁТ № ${escapeHtml(b.bill_number)}
+                </span>
+                ${dateFormatted ? `<span class="text-[11px] text-slate-400">от ${dateFormatted}</span>` : ''}
+                <span class="text-[11px] px-2.5 py-0.5 rounded-full border font-semibold ${badgeClass}">
+                  ${escapeHtml(b.pay_status || '⚪ Ожидает оплаты')}
+                </span>
+              </div>
+              <div class="text-right self-start sm:self-auto">
+                <span class="text-sm sm:text-base font-title font-extrabold text-white">
+                  ${total.toLocaleString('ru-RU')} ₽
+                </span>
+              </div>
+            </div>
+
+            <div class="mb-2">
+              <h3 class="font-title font-bold text-white text-sm sm:text-base tracking-wide">
+                ${escapeHtml(b.contractor_name)}
+              </h3>
+              ${b.address ? `
+                <div class="text-xs text-slate-400 flex items-center gap-1 mt-0.5">
+                  <span>📍</span>
+                  <span>${escapeHtml(b.address)}</span>
+                </div>
+              ` : ''}
+            </div>
+
+            ${b.description ? `
+              <div class="text-xs text-slate-300 bg-slate-900/60 rounded-xl p-2.5 mb-3 border border-white/5">
+                ${escapeHtml(b.description)}
+              </div>
+            ` : ''}
+
+            <!-- PROGRESS BAR -->
+            <div class="mb-3">
+              <div class="flex justify-between text-[11px] text-slate-400 mb-1">
+                <span>Оплачено: <strong class="text-emerald-400">${paid.toLocaleString('ru-RU')} ₽</strong> (${pct}%)</span>
+                <span>Остаток: <strong class="text-amber-400">${remain.toLocaleString('ru-RU')} ₽</strong></span>
+              </div>
+              <div class="w-full h-2 rounded-full bg-slate-800 overflow-hidden">
+                <div class="h-full rounded-full transition-all duration-500 ${pct === 100 ? 'bg-emerald-400' : 'bg-gradient-to-r from-amber-500 to-yellow-400'}" style="width: ${pct}%"></div>
+              </div>
+            </div>
+
+            <!-- ACTIONS -->
+            <div class="flex items-center justify-between pt-2 border-t border-white/5 text-xs">
+              <span class="text-[11px] text-slate-500 font-medium">
+                Статус: ${escapeHtml(b.object_status || '🟡 Отправлено КП / счёт')}
+              </span>
+              ${b.pdf_url ? `
+                <a href="${escapeHtml(b.pdf_url)}" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1 px-3 py-1.5 rounded-lg bg-sirius-gold/15 text-sirius-gold hover:bg-sirius-gold hover:text-slate-950 font-semibold transition-all">
+                  <span>📥 Счёт (PDF)</span>
+                </a>
+              ` : ''}
+            </div>
+          </div>
+        `;
+      }).join('');
+    }
+
+    function logout() {
+      sessionStorage.removeItem('sirius_reestr_pin');
+      currentPin = '';
+      document.getElementById('dashboard').classList.add('hidden');
+      document.getElementById('pin-screen').classList.remove('hidden');
+      document.getElementById('pin-input').value = '';
+      document.getElementById('pin-input').focus();
+    }
+
+    function escapeHtml(str) {
+      return (str || '')
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;');
     }
   </script>
-
-
 </body>
 </html>
